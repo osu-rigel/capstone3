@@ -1,0 +1,61 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-position: center;
+}
+
+h2{
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+.SignupPage{
+  width: 360px;
+  padding: 10px 0 0;
+  margin: auto;
+  background-color: white;
+    
+}
+
+.form{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: deepskyblue;
+    position: absolute;
+}
+
+
+.Signup input{
+   
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+}
+
+
+.Signup button{
+  background-color: green;
+  color: white;
+  padding: 15px;
+  margin: 0 0 15px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.Signup a{
+    font-family: sans- serif;
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 0 15px;
+   
+}

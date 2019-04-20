@@ -1,0 +1,62 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-position: center;
+    background-image: 
+}
+
+h2{
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+.LoginPage{
+  width: 360px;
+  padding: 10px 0 0;
+  margin: auto;
+  background-color: white;
+    
+}
+
+.form{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: deepskyblue;
+    position: absolute;
+}
+
+
+.Login input{
+   
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+}
+
+
+.Login button{
+  background-color: green;
+  color: white;
+  padding: 15px;
+  margin: 0 0 15px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.Login a{
+    font-family: sans- serif;
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 0 15px;
+   
+}

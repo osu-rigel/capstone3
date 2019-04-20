@@ -1,0 +1,52 @@
+
+h2
+{
+    font-size: 16px;
+    text-align: center;
+}
+
+h3
+{
+    font-size: 14px;
+}
+
+.Links ul{
+    list-style: none;
+    float: right;
+    margin-top: 0;
+}
+
+
+.Links ul li{
+    display: inline-block;
+   
+}
+
+
+.Links ul a{
+    color: green;
+    display: inline-block;
+    float:right;
+    border-style: solid;
+    border-color: powderblue;
+    text-align: center;
+    background-color: white;
+    padding: 8px;
+    margin: 0 0 10px;
+}
+
+.Links ul a:hover {
+    color: Orange;
+    background: yellow;
+}
+
+table{
+   
+    border-style: solid;
+}
+
+table, td, th {
+    border: 1px solid black;
+    
+}
+
