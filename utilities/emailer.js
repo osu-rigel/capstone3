@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
 
-function emailer(){
+function emailer(msg_recipients, msg_subject, msg_html){
     var transporter = nodemailer.createTransport({
         host : "mail.engr.oregonstate.edu",
         port : 465,
@@ -14,9 +14,9 @@ function emailer(){
     })
     transporter.sendMail({
         from : "ken@capstone.com",
-        to: "hallkenn@oregonstate.edu, prashara@oregonstate.edu, anmistry@oregonstate.edu",
-        subject: "testing capstone emailer feature",
-        html: "<h1>HELLO WORLD</h1>"
+        to: msg_recipients,
+        subject: msg_subject,
+        html: msg_html
     })
 }
 
