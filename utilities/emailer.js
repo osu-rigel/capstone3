@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('./secret_info.json'));
+const config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
 
 function emailer(){
     var transporter = nodemailer.createTransport({
