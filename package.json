@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "fs": "0.0.1-security",
     "hbs": "^4.0.4",
     "nodemailer": "^6.1.1",
