@@ -1,4 +1,7 @@
 const express = require('express');
+const session = require('express-session');
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
 
 var app = express();
 
@@ -6,6 +9,15 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static('public'));
 
+//authentication + sessions
+app.use(session({
+    secret : config['SECRET'],
+    cookie : {
+        maxAge : 6000000
+    }
+}))
+
+//page routes
 const login = require('./routes/login.js');
 const user_page = require('./routes/user_page.js');
 const plotlyTest = require('./routes/plotlyTest.js');
