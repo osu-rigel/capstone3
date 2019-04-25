@@ -1,22 +1,23 @@
 {
-  "name": "capstone3",
+  "name": "emp_portal",
   "version": "1.0.0",
-  "description": "",
+  "description": "My employee portal",
   "main": "server.js",
-  "dependencies": {
-    "express": "^4.16.4",
-    "express-session": "^1.16.1",
-    "fs": "0.0.1-security",
-    "hbs": "^4.0.4",
-    "nodemailer": "^6.1.1",
-    "plotly": "^1.0.6",
-    "sqlite3": "^4.0.6"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "express-mysql-session": "^2.1.0",
+    "express-session": "^1.16.1",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
 }
