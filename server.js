@@ -58,6 +58,8 @@ const index = require('./routes/index')
 app.use('/', index);
 const emailTest = require('./routes/emailTest');
 app.use('/emailTest', emailTest);
+const plotlyTest = require('./routes/plotlyTest');
+app.use('/plotlyTest', plotlyTest);
 
 passport.use('local_user',new LocalStrategy(
     {
