@@ -10,13 +10,22 @@ authenticate.isAuth = (req, res) => {
     }
 }
 
-authenticate.checkCredentials = (req,res) => {
-    // check for username + password in the database
-
-    // if username + password not in database, send back to login with error message
-
-    // if in database, reroute appropriately based on whether is user/admin
-
-    // set req.session.isAuthenticated to true
+authenticate.isLoggedIn = (req, res) => {
+    if( req.isAuthenticated() ){ 
+        return 1;
+    } else {
+        res.redirect('/login');
+        return 0;
+    }
 }
+
+authenticate.isAdminLoggedIn = (req, res) => {
+    if( req.isAuthenticated() ){
+        return 1;
+    } else {
+        res.redirect('/adminlogin');
+        return 0;
+    }
+}
+
 module.exports = authenticate;

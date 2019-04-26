@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var passport   = require('passport')
-
-
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+const authUtil = require('../utilities/authenticate');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -15,30 +14,28 @@ router.get('/', function(req, res) {
 });
 
 // User profile page.
-router.get('/profile', isLoggedIn(),function(req, res) {
+router.get('/profile', (req, res, next) => {
+  if( !authUtil.isLoggedIn(req,res) ){
+    return;
+  }
   console.log(req.user.firstname);
   res.render('profile', { title: 'Profile',name: req.user.firstname });
 });
 
 
 // login page.
-router.get('/login', function(req, res) {
-  
-  res.render('login');
+router.get('/Login', function(req, res) {
+  res.render('Login');
 });
 
 
 router.post('/login', passport.authenticate(
     'local_user',{
-        successRedirect:'/profile',
-        failureRedirect: '/login'
+      successRedirect:'/profile',
+      failureRedirect: '/login'
     }));
 
-
 // logout route
-
-
-
 router.get('/logout', (req, res, next) => {
     req.logout()                                 // this only logs out of the application. Does not remove session.
     req.session.destroy(() => {                  // removes session.
@@ -65,11 +62,11 @@ router.post('/register', function(req, res, next) {
   const db = require ('../db.js');           // To go down one directory we use .. here.
  
  
- // To hash the password.
- bcrypt.hash(password, saltRounds, function(err, hash) {   
-  // Store hash in your password DB.
+  // To hash the password.
+  bcrypt.hash(password, saltRounds, function(err, hash) {   
+    // Store hash in your password DB.
       db.query('Insert INTO users (email,firstname, lastname, password) VALUES (?,?,?,?)',[email,firstname, lastname, hash],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
-         if(error) throw error;
+        if(error) throw error;
             
         db.query('SELECT LAST_INSERT_ID() AS user_id',function(error,results,fields){
             if(err) throw error;
@@ -77,16 +74,16 @@ router.post('/register', function(req, res, next) {
             console.log("User id is: ");
             console.log(user_id);
             console.log(results[0]);
-           // console.log("User id is: "+ results[0].user_id);
+            // console.log("User id is: "+ results[0].user_id);
             //console.log(results[0].hello);
             //console.log("Above line should be undefined");
             req.login(user_id,function(err){
                 res.redirect('/profile');
             });
         });
-         // else render this page.
-     });
-});
+          // else render this page.
+      });
+  });
      
 });
 
@@ -96,7 +93,10 @@ router.post('/register', function(req, res, next) {
 // Admin routes go here....
 
 // Admin profile page.
-router.get('/adminprofile', isAdminLoggedIn(),function(req, res) {
+router.get('/adminprofile', (req, res) => {
+  if( !authUtil.isAdminLoggedIn(req, res) ){
+    return;
+  }
   console.log(req.user);
   res.render('adminprofile', { title: 'Admin Profile' });
 });
@@ -134,11 +134,11 @@ router.post('/adminregister', function(req, res, next) {
   const db = require ('../db.js');           // To go down one directory we use .. here.
  
  
- // To hash the password.
- bcrypt.hash(password, saltRounds, function(err, hash) {   
-  // Store hash in your password DB.
+  // To hash the password.
+  bcrypt.hash(password, saltRounds, function(err, hash) {   
+    // Store hash in your password DB.
       db.query('Insert INTO admin (email,password) VALUES (?,?)',[email , hash],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
-         if(error)
+        if(error)
             throw error;
             
         db.query('SELECT LAST_INSERT_ID() AS user_id',function(error,results,fields){
@@ -152,49 +152,19 @@ router.post('/adminregister', function(req, res, next) {
                 res.redirect('/adminprofile');
             });
         });
-         // else render this page.
-     });
+        // else render this page.
+    });
+  });
 });
-     
-});
-
-
-
-
-
-
-
-
 
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
 });
 
 passport.deserializeUser(function(user_id, done) {
-      done(null, user_id);
-  });
+  done(null, user_id);
+});
   
-  // Authentication middleware function try one for user and one for admin.
-  function isLoggedIn() {
-     return (req,res,next)=>{
-         if(req.isAuthenticated()) return next();
-         
-         res.redirect('/login');
-     }
- 
-   }
-
-    function isAdminLoggedIn() {
-     return (req,res,next)=>{
-         if(req.isAuthenticated()) return next();
-         
-         res.redirect('/adminlogin');
-     }
- 
-   }
-
-
-
-
+// Authentication middleware function try one for user and one for admin.
 
 module.exports = router;
