@@ -13,7 +13,6 @@ var MySQLStore = require('express-mysql-session')(session)  // To store sessions
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy      // local strategy for authorizing using local database.
 var bcrypt = require('bcrypt')
-var index = require('./routes/index')
 
 //For Handlebars
 app.set('views', './views')
@@ -54,7 +53,11 @@ app.use(function(req,res,next){
     next();
 });
 
+//routes
+const index = require('./routes/index')
 app.use('/', index);
+const emailTest = require('./routes/emailTest');
+app.use('/emailTest', emailTest);
 
 passport.use('local_user',new LocalStrategy(
     {
