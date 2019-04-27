@@ -1,0 +1,167 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-position: center;
+    background: url("background_image.png");
+    background-size: cover;
+}
+
+h2{
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    color: darkorange;
+    text-shadow: 2px 2px black;
+}
+
+h3{
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: cornflowerblue;
+    text-align: center;
+}
+
+h4{
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: goldenrod;
+    text-align: left;
+}    
+
+p{
+   margin: 30px;
+   text-align: center;
+   font-size: 16px;
+   font-family: sans-serif; 
+   color: gold;
+}
+
+.Form {
+    width: 360px;
+    padding: 10px 0 0;
+    margin: auto;
+    background: transparent;   
+}
+
+.Form_Layout select{
+    padding: 15px;
+    margin: 0 0 15px;
+    border: 2px solid black;
+    outline: 1;
+    width: 100%;
+    background-color: powderblue;
+}
+
+Form_Layout {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: deepskyblue;
+    position: absolute;
+}
+
+input[type=text] {
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
+
+input[type=email] {
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
+
+input[type=password] {
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
+
+
+input[type=submit] {
+  background-color: darkseagreen;
+  color: black;
+  padding: 15px;
+  margin: 0 0 15px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+a{
+    font-family: sans- serif;
+    color: honeydew;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 0 15px;
+}
+
+ul{
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    margin: 3px;
+    float: left;
+    width: 85px;
+    height: 40px;
+    background: transparent;
+    border-style: solid;
+    border-color: powderblue;
+    opacity: 1;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+}
+
+
+ul li a{
+    text-decoration: none;
+    color: orange;
+    display: block;
+    position: realtive;
+}
+
+ul li a:hover{
+    background-color: white; 
+}
+
+ul li ul li{
+    display: none;
+}
+
+ul li:hover ul li {
+    display: block;  
+}
+
+table{
+    border-style: solid;
+    color: darkkhaki;
+    float: left;
+}
+
+table, td, th {
+    border: 1px solid papayawhip;
+    
+}
+
