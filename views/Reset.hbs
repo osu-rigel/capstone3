@@ -1,0 +1,19 @@
+<h2>Employee Recogniton Portal Reset Account Page</h2>
+
+<h3>Not able to login? Please provide following information. Reset link will be sent to your email.</h3>
+
+<div class ="Form">
+    <form action="" method="post">
+        <div class = "Form_Layout">
+            <input type="email" placeholder="Enter Email Address" name="Username" required/><br/>
+                <select name=SecurityQuestion required>
+                    <option value=1>What is your favorite athelete's name?</option>
+                    <option value=2>What is the name of your favorite restaurant?</option>
+                    <option value=3>In which city you were born?</option>
+                </select>
+            <input type="password" placeholder="Security Answer" name="SecurityAnswer" required/><br/>
+            <input type="submit" value="Submit">
+        </div>
+        {{{ResetStatus}}}
+    </form>
+</div>
