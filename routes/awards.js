@@ -8,25 +8,46 @@ if( !fs.existsSync('./database' ) ){
     fs.mkdirSync('./database');
 }
 if( !fs.existsSync('./database/awards.db') ){
-    fs.writeFileSync('./database/awards.db', null, null);
+    fs.writeFileSync('./database/awards.db', "");
+    var db = new sqlite3.Database('./database/awards.db', sqlite3.OPEN_CREATE ,(err) => {
+        if(err){
+            console.error(err);
+        }
+    });
+    closeDatabase(db);
 }
-var db = openDatabase;
-db.run("CREATE TABLE IF NOT EXISTS awards (id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER)")
+var db = openDatabase();
+db.run("CREATE TABLE IF NOT EXISTS awards (id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER)", [], (err) => {
+    if(err){
+        console.error(err);
+    }
+})
+db.run("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [1, 'Ken', 'kenhallthe3rd@gmail.com', 5, 1234567], (err) => {
+    if(err){
+        console.error(err);
+    }
+})
 closeDatabase(db);
 
+
+
+// routes
 router.get('/search/:field/:value', (req, res) => {
+    if( req.params['field'] === 'id' || req.params['field'] === 'award_type' || req.params['field'] === 'awardee_email' || req.params['field'] === 'awardee_name' || req.params['field'] === 'awarder_ID' || req.params['field'] === 'timestamp'){
+        var parameter = req.params['field'];
+    } else {
+        res.sendStatus(400);
+        return;
+    }
+    var results = [];
     var db = openDatabase();
-    var results = []
-    db.serialize( () => {
-        db.all("SELECT * FROM awards WHERE ? = ?", [req.params['field'], req.params['value']], (err, matches) => {
-            for( match in matches ){
-                console.log(matches[match]);
-                results.push(matches[match]);
-            }
-            res.send(results);
-        });
-    })
-    closeDatabase(db);
+    console.log(parameter + ":" + req.params['value']);
+    db.each("SELECT * FROM awards WHERE " + parameter + " = ?", [req.params['value']], (err, matches) => {
+        results.push(matches);
+    }, () => {
+        res.send(results);
+        closeDatabase(db);
+    });
 });
 
 router.post('/addAward', (req, res) => {
@@ -35,12 +56,10 @@ router.post('/addAward', (req, res) => {
         return;
     }
     var db = openDatabase();
-    db.serialize( () => {
-        db.run("INSERT INTO awards names (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
-            if(err){
-                console.error(err);
-            }
-        })
+    db.run("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
+        if(err){
+            console.error(err);
+        }
     })
     closeDatabase(db);
     res.sendStatus(200);
@@ -48,10 +67,12 @@ router.post('/addAward', (req, res) => {
 
 router.post('/deleteAward/', (req, res) => {
     var db = openDatabase();
-    db.run("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
-        if(err){
-            console.error(err);
-        }
+    db.serialize( () => {
+        db.run("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
+            if(err){
+                console.error(err);
+            }
+        })
     })
     closeDatabase(db);
     res.sendStatus(200);
