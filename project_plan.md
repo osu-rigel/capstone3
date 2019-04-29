@@ -10,7 +10,7 @@ Admin :
 1.	Add/ edit / delete normal users (Who can create awards).              (Assigned to : )
 2.	Add/edit / delete admin users (Who cannot create awards).	  (Assigned to : )
 3.	BI operations querying for specific data (which user created award, Regions with most award).
-4.	Exporting above queries as CSV files and or displaying results as graphs. Etc.
+4.	Exporting above queries as CSV files and or displaying results as graphs. Etc. <---- NICE TO HAVE
 
 
 Users : 

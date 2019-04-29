@@ -164,7 +164,5 @@ passport.serializeUser(function(user_id, done) {
 passport.deserializeUser(function(user_id, done) {
   done(null, user_id);
 });
-  
-// Authentication middleware function try one for user and one for admin.
 
 module.exports = router;
