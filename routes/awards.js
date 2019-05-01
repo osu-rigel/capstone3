@@ -50,6 +50,10 @@ router.get('/search/:field/:value', (req, res) => {
     });
 });
 
+router.get('/addAward', (req, res) => {
+    res.render('addAward');
+})
+
 router.post('/addAward', (req, res) => {
     if( req.body['award_type'] === undefined || req.body['awardee_name'] === undefined || req.body['awardee_email'] == undefined || req.body['awarder_ID'] === undefined || req.body['timestamp'] === undefined ){
         res.sendStatus(400);
@@ -67,12 +71,10 @@ router.post('/addAward', (req, res) => {
 
 router.post('/deleteAward/', (req, res) => {
     var db = openDatabase();
-    db.serialize( () => {
-        db.run("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
-            if(err){
-                console.error(err);
-            }
-        })
+    db.run("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
+        if(err){
+            console.error(err);
+        }
     })
     closeDatabase(db);
     res.sendStatus(200);
