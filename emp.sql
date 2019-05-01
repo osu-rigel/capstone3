@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS emp_award
     award_time TIME NOT NULL,
     award_type INT  NOT NULL,
     FOREIGN KEY (giver_id) REFERENCES emp_user(user_id)
- 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

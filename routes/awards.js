@@ -78,6 +78,10 @@ router.post('/deleteAward/', (req, res) => {
     res.sendStatus(200);
 })
 
+router.get('/showAll', (req, res) => {
+    res.render('showAll');
+})
+
 module.exports = router;
 
 function openDatabase(){
