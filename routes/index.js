@@ -5,6 +5,24 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const authUtil = require('../utilities/authenticate');
 
+function getPerson(res, db, context, user_id, complete){
+       
+        var sql = "SELECT user_id, firstname, lastname FROM users WHERE user_id = ?";
+        var inserts = [user_id];
+        db.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            console.log("I am in get person function.")
+            console.log(results[0]);
+            context.person = results[0];
+            complete();
+        });
+    }
+
+
+
 /* GET home page. */
 router.get('/', function(req, res) {
   //console.log(req);
@@ -19,7 +37,9 @@ router.get('/profile', (req, res, next) => {
     return;
   }
   console.log(req.user.firstname);
-  res.render('profile', { title: 'Profile',name: req.user.firstname });
+  console.log ("The below options show req.user id ");
+  console.log(req.user.user_id);
+  res.render('profile', { title: 'Profile',name: req.user.firstname, id: req.user.user_id });
 });
 
 
@@ -86,6 +106,51 @@ router.post('/register', function(req, res, next) {
   });
      
 });
+
+// Edit user logic goes here.
+
+  /* Display one person for the specific purpose of updating people */
+
+    router.get('/edit/:id', function(req, res){
+         if( !authUtil.isLoggedIn(req,res) ){
+           return;
+          }
+      
+        var callbackCount = 0;
+        var context = {};
+       // context.jsscripts = ["updateperson.js"];
+         const db = require ('../db.js');
+        //var mysql = req.app.get('mysql');
+        console.log("Id in req.params is: ");
+        console.log(req.params.id);
+        console.log (context);
+        getPerson(res, db, context, req.params.id, complete);
+        
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update-person', context);
+            }
+
+        }
+    });
+
+/* The URI that update data is sent to in order to update a person */
+
+    router.post('/edit/:id', function(req, res,next){
+        if( !authUtil.isLoggedIn(req,res) ){
+           return;
+          }
+        const db = require ('../db.js');
+        console.log(req.body)
+        console.log(req.params.id)
+        var sql = "UPDATE users SET firstname=?, lastname=? WHERE user_id=?";
+        var inserts = [req.body.firstname, req.body.lastname, req.params.id];
+        db.query(sql,inserts,function(error, results, fields){
+            if(error) throw error;
+            res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
+        });
+    });
 
 
 

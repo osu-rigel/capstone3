@@ -4,6 +4,7 @@ var app = express()
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars')
+var multer = require('multer')
 var fs = require('fs');
 var config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
 
@@ -14,8 +15,50 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy      // local strategy for authorizing using local database.
 var bcrypt = require('bcrypt')
 
+// Set storage engine
+var storage = multer.diskStorage({
+    destination:'./public/uploads',
+    filename:function(req,file,cb){
+        cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
+        
+    }
+})
+
+// Initialize upload.
+
+global.upload = multer({
+    storage: storage,
+    limits: {fileSize:1000000},
+    fileFilter:function(req,file,cb){
+        checkFileType(file,cb);    
+    
+    }
+}).single('myImage');
+
+
+// checkFileType function 
+
+function checkFileType(file,cb){
+    const filetypes = /jpeg|jpg|png|gif/;              // regular expression.
+    
+    // check extension
+    const extname = filetypes.test(path.extname (file.originalname).toLowerCase());
+    
+    // check mimetype
+    const mimetype = filetypes.test(filetypes.mimetype);
+    if (mimetype && extname){
+        return cb(null,true);
+    }else{
+        cb("Err: Images only");
+    }
+    
+};
+
+
+
+
 //For Handlebars
-app.set('views', './views')
+app.set('views', './views');
 app.engine('hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
@@ -62,6 +105,11 @@ const plotlyTest = require('./routes/plotlyTest');
 app.use('/plotlyTest', plotlyTest);
 const awards = require('./routes/awards');
 app.use('/awards', awards);
+
+
+// Upload file stuff.
+const uploadFile = require('./routes/uploadfile');
+app.use('/upload', uploadFile);
 
 passport.use('local_user',new LocalStrategy(
     {
@@ -136,10 +184,10 @@ passport.use('local_admin',new LocalStrategy(
     }
 ));
 
-app.listen(config['PORT_NUM'], (err) => { 
-    if(!err){
+app.listen(process.env.PORT,process.env.IP,function(err) {
+ 
+    if (!err)
         console.log("Site is live");
-    } else {
-        console.log(err)
-    } 
+    else console.log(err)
+ 
 });
