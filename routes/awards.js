@@ -4,7 +4,7 @@ const fs = require('fs');
 const db = require ('../db.js'); 
 
 // init table
-db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
+db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_dept TEXT, awardee_region TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
     if(err){
         console.error(err);
     }
@@ -29,7 +29,7 @@ router.post('/addAward', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    db.query("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
+    db.query("INSERT INTO awards (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['award_dept'], req.body['award_region'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
         if(err){
             console.error(err);
         }
