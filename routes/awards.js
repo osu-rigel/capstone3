@@ -47,20 +47,3 @@ router.post('/deleteAward/', (req, res) => {
 })
 
 module.exports = router;
-
-function openDatabase(){
-    let db = new sqlite3.Database('./database/awards.db', sqlite3.OPEN_READWRITE, (err) => {
-        if(err){
-            console.error(err);
-        }
-    });
-    return db;
-}
-
-function closeDatabase(db){
-    db.close( (err) => {
-        if(err){
-            console.error(err);
-        }
-    })
-}
