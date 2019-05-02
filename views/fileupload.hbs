@@ -1,0 +1,22 @@
+
+{{> header }}
+
+ <div class="container">
+  <h2 class="text-center font-weight-normal">Employee Portal User Login</h2>  
+  {{!-- {{ typeof msg!= 'undefined' ? msg : ''}}--}}
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+          <label for="myImage">Image file:</label>
+          <input name="myImage" type="file" class="form-control" placeholder="Signature Image" required autofocus/>     {{!form email field needs to be username for passport local strategy authentication to work}}
+         
+       </div>
+      <div class="my-4" >
+        <button class="btn btn-primary">Upload Image</button>
+      </div>
+      
+    </form>
+  </div>
+  
+ 
+
+{{> footer }}s
