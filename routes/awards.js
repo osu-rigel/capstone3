@@ -1,35 +1,14 @@
 const express = require('express');
 var router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
+const db = require ('../db.js'); 
 
-// init database 
-if( !fs.existsSync('./database' ) ){
-    fs.mkdirSync('./database');
-}
-if( !fs.existsSync('./database/awards.db') ){
-    fs.writeFileSync('./database/awards.db', "");
-    var db = new sqlite3.Database('./database/awards.db', sqlite3.OPEN_CREATE ,(err) => {
-        if(err){
-            console.error(err);
-        }
-    });
-    closeDatabase(db);
-}
-var db = openDatabase();
-db.run("CREATE TABLE IF NOT EXISTS awards (id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER)", [], (err) => {
+// init table
+db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
     if(err){
         console.error(err);
     }
 })
-db.run("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [1, 'Ken', 'kenhallthe3rd@gmail.com', 5, 1234567], (err) => {
-    if(err){
-        console.error(err);
-    }
-})
-closeDatabase(db);
-
-
 
 // routes
 router.get('/search/:field/:value', (req, res) => {
@@ -39,14 +18,9 @@ router.get('/search/:field/:value', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    var results = [];
-    var db = openDatabase();
     console.log(parameter + ":" + req.params['value']);
-    db.each("SELECT * FROM awards WHERE " + parameter + " = ?", [req.params['value']], (err, matches) => {
-        results.push(matches);
-    }, () => {
-        res.send(results);
-        closeDatabase(db);
+    db.query("SELECT * FROM awards WHERE " + parameter + " = ?", [req.params['value']], (err, result) => {
+        res.send(result);
     });
 });
 
@@ -55,26 +29,20 @@ router.post('/addAward', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    var db = openDatabase();
-    db.run("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
+    db.query("INSERT INTO awards (award_type, awardee_name, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
         if(err){
             console.error(err);
         }
     })
-    closeDatabase(db);
     res.sendStatus(200);
 });
 
 router.post('/deleteAward/', (req, res) => {
-    var db = openDatabase();
-    db.serialize( () => {
-        db.run("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
-            if(err){
-                console.error(err);
-            }
-        })
+    db.query("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
+        if(err){
+            console.error(err);
+        }
     })
-    closeDatabase(db);
     res.sendStatus(200);
 })
 
