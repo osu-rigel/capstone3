@@ -1,7 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../utilities/authenticate');
 
 router.get('/', (req, res) => {
+    if( auth.isAdminLoggedIn === 0 ){
+        return;
+    }
     res.render('admin_page');
 })
 
