@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const auth = require('../utilities/authenticate');
+const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
     if( auth.isAdminLoggedIn === 0 ){

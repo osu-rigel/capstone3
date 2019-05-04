@@ -3,7 +3,7 @@ var router = express.Router();
 var passport   = require('passport')
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-const authUtil = require('../utilities/authenticate');
+const authUtil = require('../utilities/authenticate.js');
 
 function getPerson(res, db, context, user_id, complete){
        

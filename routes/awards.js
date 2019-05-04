@@ -2,7 +2,7 @@ const express = require('express');
 var router = express.Router();
 const fs = require('fs');
 const db = require ('../db.js');
-const auth = require('../utilities/authenticate');
+const auth = require('../utilities/authenticate.js');
 
 // init table
 db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTO_INCREMENT, award_type INTEGER, awardee_name TEXT, awardee_dept TEXT, awardee_region TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
@@ -13,7 +13,7 @@ db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUT
 
 // routes
 router.get('/search/:field/:value', (req, res) => {
-    if( auth.isLoggedIn() === 0 ){
+    if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }
     if( req.params['field'] === 'id' || req.params['field'] === 'award_type' || req.params['field'] === 'awardee_email' || req.params['field'] === 'awardee_name' || req.params['field'] === 'awarder_ID' || req.params['field'] === 'timestamp'){
@@ -29,7 +29,7 @@ router.get('/search/:field/:value', (req, res) => {
 });
 
 router.post('/addAward', (req, res) => {
-    if( auth.isLoggedIn() === 0 ){
+    if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }
     if( req.body['award_type'] === undefined || req.body['awardee_name'] === undefined || req.body['awardee_email'] == undefined || req.body['awarder_ID'] === undefined || req.body['timestamp'] === undefined ){
@@ -45,7 +45,7 @@ router.post('/addAward', (req, res) => {
 });
 
 router.post('/deleteAward/', (req, res) => {
-    if( auth.isLoggedIn() === 0 ){
+    if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }
     db.query("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
