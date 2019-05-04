@@ -5,6 +5,13 @@ router.get('/', (req, res) => {
     res.render('Login');
 })
 
+router.post('/login', passport.authenticate(
+    'local_user',{
+        successRedirect:'/profile',
+        failureRedirect: '/login'
+    })
+);
+
 router.get('/reset', (req, res) => {
     res.render("Reset");
 })
