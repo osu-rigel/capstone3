@@ -4,7 +4,7 @@ const fs = require('fs');
 const db = require ('../db.js'); 
 
 // init table
-db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTOINCREMENT, award_type INTEGER, awardee_name TEXT, awardee_dept TEXT, awardee_region TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
+db.query("CREATE TABLE IF NOT EXISTS emp_award (award_id INTEGER PRIMARY KEY AUTO_INCREMENT, award_type INTEGER, awardee_name TEXT, awardee_dept TEXT, awardee_region TEXT, awardee_email TEXT, awarder_ID INTEGER, timestamp INTEGER, FOREIGN KEY (awarder_ID) REFERENCES emp_user(user_id))", [], (err) => {
     if(err){
         console.error(err);
     }
