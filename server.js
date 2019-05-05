@@ -42,10 +42,10 @@ function checkFileType(file,cb){
     const filetypes = /jpeg|jpg|png|gif/;              // regular expression.
     
     // check extension
-    const extname = filetypes.test(path.extname (file.originalname).toLowerCase());
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     
     // check mimetype
-    const mimetype = filetypes.test(filetypes.mimetype);
+    const mimetype = filetypes.test(file.mimetype);
     if (mimetype && extname){
         return cb(null,true);
     }else{
