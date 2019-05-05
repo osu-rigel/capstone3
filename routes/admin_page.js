@@ -4,6 +4,7 @@ const auth = require('../utilities/authenticate.js');
 const db = require ('../db.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+var passport   = require('passport')
 
 router.get('/', (req, res) => {
     if( auth.isAdminLoggedIn === 0 ){
