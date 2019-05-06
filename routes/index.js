@@ -2,22 +2,24 @@ var express = require('express');
 var router = express.Router();
 var passport   = require('passport')
 const authUtil = require('../utilities/authenticate.js');
+const db = require ('../utilities/db.js');
 
-function getPerson(res, db, context, user_id, complete){
-       
-        var sql = "SELECT user_id, firstname, lastname FROM users WHERE user_id = ?";
-        var inserts = [user_id];
-        db.query(sql, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            console.log("I am in get person function.")
-            console.log(results[0]);
-            context.person = results[0];
-            complete();
-        });
-    }
+function getPerson(res, context, user_id, complete){
+    var sql = "SELECT user_id, firstname, lastname FROM users WHERE user_id = ?";
+    var inserts = [user_id];
+    var dbConnection = db.connect()
+    dbConnection.query(sql, inserts, function(error, results, fields){
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        console.log("I am in get person function.")
+        console.log(results[0]);
+        context.person = results[0];
+        complete();
+    });
+    db.disconnect(dbConnection);
+}
 
 
 
@@ -52,12 +54,11 @@ router.get('/logout', (req, res, next) => {
         var callbackCount = 0;
         var context = {};
        // context.jsscripts = ["updateperson.js"];
-         const db = require ('../db.js');
         //var mysql = req.app.get('mysql');
         console.log("Id in req.params is: ");
         console.log(req.params.id);
         console.log (context);
-        getPerson(res, db, context, req.params.id, complete);
+        getPerson(res, context, req.params.id, complete);
         
         function complete(){
             callbackCount++;
@@ -71,15 +72,16 @@ router.get('/logout', (req, res, next) => {
 /* The URI that update data is sent to in order to update a person */
 
     router.post('/edit/:id', function(req, res,next){
-        const db = require ('../db.js');
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE users SET firstname=?, lastname=? WHERE user_id=?";
         var inserts = [req.body.firstname, req.body.lastname, req.params.id];
-        db.query(sql,inserts,function(error, results, fields){
+        var dbConnection = db.connect();
+        dbConnection.query(sql,inserts,function(error, results, fields){
             if(error) throw error;
             res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
         });
+        db.disconnect(dbConnection);
     });
 
 passport.serializeUser(function(user_id, done) {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../utilities/authenticate.js');
-const db = require ('../db.js');
+const db = require ('../utilities/db.js');
 
 /*body = [
     {
@@ -32,13 +32,15 @@ const db = require ('../db.js');
         "timestamp" : 12347
     }
 ]
+var dbConnection = db.connect();
 for( var i=0; i<2; ++i ){
-    db.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [body[i]['award_type'], body[i]['awardee_name'], body[i]['award_dept'], body[i]['award_region'], body[i]['awardee_email'], body[i]['awarder_ID'], body[i]['timestamp']], (err) => {
+    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [body[i]['award_type'], body[i]['awardee_name'], body[i]['award_dept'], body[i]['award_region'], body[i]['awardee_email'], body[i]['awarder_ID'], body[i]['timestamp']], (err) => {
         if(err){
             console.error(err);
         }
     })
-}*/
+}
+db.disconnect(dbConnection);*/
 
 router.get('/', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
@@ -63,7 +65,8 @@ router.get('/awardsReceived', (req, res) => {
     if( req.query['field'] === undefined ){
         SQLquery = "SELECT * FROM emp_award";
     }
-    db.query(SQLquery, SQLparams, (err, result) => {
+    var dbConnection = db.connect();
+    dbConnection.query(SQLquery, SQLparams, (err, result) => {
         // parse the results
         var talliedResults = {};
         for( entry in result ){
@@ -85,7 +88,7 @@ router.get('/awardsReceived', (req, res) => {
         }
         res.send(JSON.stringify([output]));
     });
-
+    db.disconnect(dbConnection);
 })
 
 

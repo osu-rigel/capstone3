@@ -7,6 +7,7 @@ var exphbs = require('express-handlebars')
 var multer = require('multer')
 var fs = require('fs');
 var config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
+const db = require('./utilities/db.js');
 
 // Authentication stuff
 var session  = require('express-session')
@@ -19,8 +20,7 @@ var bcrypt = require('bcrypt')
 var storage = multer.diskStorage({
     destination:'./public/uploads',
     filename:function(req,file,cb){
-        cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));
-        
+        cb(null,file.fieldname+'-'+Date.now()+path.extname(file.originalname));  
     }
 })
 
@@ -31,7 +31,6 @@ global.upload = multer({
     limits: {fileSize:1000000},
     fileFilter:function(req,file,cb){
         checkFileType(file,cb);    
-    
     }
 }).single('myImage');
 
@@ -51,10 +50,7 @@ function checkFileType(file,cb){
     }else{
         cb("Err: Images only");
     }
-    
 };
-
-
 
 
 //For Handlebars
@@ -63,7 +59,6 @@ app.engine('hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 //For BodyParser
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -125,10 +120,10 @@ passport.use('local_user',new LocalStrategy(
         console.log(email);
         console.log(password);
     
-        const db = require('./db');
         // handle error for invalid email as well.
         // This will give us user_id ,firstname and password in results.We can modify admin in similar fashion.
-        db.query('SELECT user_id,firstname, password FROM users WHERE email=?',[email],function(err,results,fields){
+        var dbConnection = db.connect();
+        dbConnection.query('SELECT user_id,firstname, password FROM users WHERE email=?',[email],function(err,results,fields){
             if(err){
                 done(err) };
             console.log("Results length is: "+ results.length);
@@ -150,6 +145,7 @@ passport.use('local_user',new LocalStrategy(
                 }
             });    
         })
+        db.disconnect(dbConnection);
     }
 ));
 
@@ -162,9 +158,9 @@ passport.use('local_admin',new LocalStrategy(
         console.log(email);
         console.log(password);
     
-        const db = require('./db');
         // handle error for invalid email as well.
-        db.query('SELECT user_id, password FROM admin WHERE email=?',[email],function(err,results,fields){
+        var dbConnection = db.connect();
+        dbConnection.query('SELECT user_id, password FROM admin WHERE email=?',[email],function(err,results,fields){
             if(err){
                 done(err) };
             console.log("Results length is: "+ results.length);
@@ -186,13 +182,12 @@ passport.use('local_admin',new LocalStrategy(
                 } 
             });
         })
+        db.disconnect(dbConnection);
     }
 ));
 
 app.listen(config['PORT_NUM'],function(err) {
- 
     if (!err)
         console.log("Site is live");
     else console.log(err)
- 
 });

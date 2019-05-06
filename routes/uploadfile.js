@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const db = require ('../utilities/db.js'); 
 const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
@@ -13,18 +13,18 @@ router.post('/', (req, res) => {
             res.render('fileupload',{msg:err});
             console.log(err);
         }else{
-            const db = require ('../db.js');           // To go down one directory we use .. here.
+          // To go down one directory we use .. here.
             console.log(req.file);
             
             //res.send('test');
             console.log('file received');
             //console.log(req);
-            
-            db.query('Insert INTO file (name,type, size) VALUES (?,?,?)',[req.file.filename,req.file.mimetype,req.file.size],function(error,results,fields){  
+            var dbConnection = db.connect();
+            dbConnection.query('Insert INTO file (name,type, size) VALUES (?,?,?)',[req.file.filename,req.file.mimetype,req.file.size],function(error,results,fields){  
                 if(error) throw error;
                 console.log("Inserted data");
                 
-                // db.query('SELECT LAST_INSERT_ID(), name from file',function(error,results,fields){
+                // dbConnection.query('SELECT LAST_INSERT_ID(), name from file',function(error,results,fields){
                 //     if(err) throw error;
                     
                 //     console.log("Results are: ");
@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
                 // });
                
             });
+            db.disconnect(dbConnection);
             var message = "Successfully! uploaded";
             console.log("Image name here as well");
             var imgName = req.file.filename;
