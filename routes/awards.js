@@ -23,7 +23,7 @@ router.get('/search/:field/:value', (req, res) => {
         return;
     }
     console.log(parameter + ":" + req.params['value']);
-    db.query("SELECT * FROM awards WHERE " + parameter + " = ?", [req.params['value']], (err, result) => {
+    db.query("SELECT * FROM emp_award WHERE " + parameter + " = ?", [req.params['value']], (err, result) => {
         res.send(result);
     });
 });
@@ -36,7 +36,7 @@ router.post('/addAward', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    db.query("INSERT INTO awards (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['award_dept'], req.body['award_region'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
+    db.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['award_dept'], req.body['award_region'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
         if(err){
             console.error(err);
         }
@@ -48,7 +48,7 @@ router.post('/deleteAward/', (req, res) => {
     if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }
-    db.query("DELETE FROM awards where ? = ?", [req.body['field'], req.body['value']], (err) => {
+    db.query("DELETE FROM emp_award where ? = ?", [req.body['field'], req.body['value']], (err) => {
         if(err){
             console.error(err);
         }
