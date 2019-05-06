@@ -3,6 +3,43 @@ var router = express.Router();
 const auth = require('../utilities/authenticate.js');
 const db = require ('../db.js');
 
+/*body = [
+    {
+        "award_type" : 2,
+        "awardee_name" : "Ken",
+        "award_dept" : "Backend",
+        "award_region" : "Oregon",
+        "awardee_email" : "kenhallthe3rd@gmail.com",
+        "awarder_id" : 7,
+        "timestamp" : 13579
+    },
+    {
+        "award_type" : 2,
+        "awardee_name" : "Ankita",
+        "award_dept" : "Frontend",
+        "award_region" : "California",
+        "awardee_email" : "anmistry@gmail.com",
+        "awarder_id" : 4,
+        "timestamp" : 12789
+    },
+    {
+        "award_type" : 1,
+        "awardee_name" : "Aseem",
+        "award_dept" : "Backend",
+        "award_region" : "Nevada",
+        "awardee_email" : "prashara@gmail.com",
+        "awarder_id" : 5,
+        "timestamp" : 12347
+    }
+]
+for( var i=0; i<2; ++i ){
+    db.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [body[i]['award_type'], body[i]['awardee_name'], body[i]['award_dept'], body[i]['award_region'], body[i]['awardee_email'], body[i]['awarder_ID'], body[i]['timestamp']], (err) => {
+        if(err){
+            console.error(err);
+        }
+    })
+}*/
+
 router.get('/', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
         return;
@@ -28,11 +65,25 @@ router.get('/awardsReceived', (req, res) => {
     }
     db.query(SQLquery, SQLparams, (err, result) => {
         // parse the results
-        var output = {};
+        var talliedResults = {};
         for( entry in result ){
-            console.log(result[entry]);
+            if( talliedResults[ result[entry]['awardee_name'] ] === undefined ){
+                talliedResults[ result[entry]['awardee_name'] ] = 1;
+            } else {
+                talliedResults[ result[entry]['awardee_name']] += 1;
+            }
         }
-        res.send(JSON.stringify(output));
+        var output = {
+            "x" : [],
+            "y" : [],
+            type : "bar"
+        };
+        // convert to x and y arrays
+        for( key in talliedResults ){
+            output['x'].push(key);
+            output['y'].push(talliedResults[key]);
+        }
+        res.send(JSON.stringify([output]));
     });
 
 })
