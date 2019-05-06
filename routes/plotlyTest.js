@@ -46,8 +46,7 @@ router.get('/', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }*/
-    res.sendStatus(200);
-    //res.render('plotlyTest');
+    res.render('plotlyTest');
 })
 
 router.get('/awardsGiven', (req, res) => {
