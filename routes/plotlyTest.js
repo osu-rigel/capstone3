@@ -24,7 +24,7 @@ router.get('/awardsReceived', (req, res) => {
     var SQLparams = [];
     var SQLquery = "";
     if( req.query['field'] === undefined ){
-        SQLquery = "SELECT * FROM awards";
+        SQLquery = "SELECT * FROM emp_award";
     }
     db.query(SQLquery, SQLparams, (err, result) => {
         // parse the results
