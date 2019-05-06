@@ -46,6 +46,7 @@ router.get('/', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }*/
+    console.log("YOU MADE A CHANGE!");
     res.render('plotlyTest');
 })
 
