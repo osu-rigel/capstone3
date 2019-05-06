@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../utilities/authenticate.js');
-const db = require ('../utilities/db.js/index.js');
+const db = require ('../utilities/db.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var passport   = require('passport')
