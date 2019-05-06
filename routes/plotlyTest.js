@@ -28,8 +28,11 @@ router.get('/awardsReceived', (req, res) => {
     }
     db.query(SQLquery, SQLparams, (err, result) => {
         // parse the results
-        
-        res.send(JSON.stringify());
+        var output = {};
+        for( entry in result ){
+            console.log(result[entry]);
+        }
+        res.send(JSON.stringify(output));
     });
 
 })
