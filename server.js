@@ -109,7 +109,7 @@ app.use('/login', login);
 const uploadFile = require('./routes/uploadfile');
 app.use('/upload', uploadFile);
 const user = require('./routes/user_page');
-app.use('/user', user);
+app.use('/user_page', user);
 
 passport.use('local_user',new LocalStrategy(
     {

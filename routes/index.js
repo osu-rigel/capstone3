@@ -25,7 +25,7 @@ function getPerson(res, context, user_id, complete){
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('home', { title: 'Home' });
+  res.render('Dashboard');
 });
 
 // User profile page.

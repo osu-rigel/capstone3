@@ -6,8 +6,18 @@ router.get('/', (req, res) => {
     if( auth.isLoggedIn(req, res) === 0 ){
         return;
     }
+    // figure out what session they are on and dump them on their user page
     res.render('user_page');
 })
+
+router.post('/', (request, res) => {
+    var username = request.body.Username;
+    var password = request.body.Password;
+    console.log(username + ":" + password);
+    // 
+    res.render('user_page');
+})
+
 
 // TODO : more get/post routes for user table manipulations
 
