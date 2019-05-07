@@ -25,24 +25,19 @@ router.post('/register', function(req, res, next) {
         // Store hash in your password DB.
         var dbConnection = db.connect();
         dbConnection.query('Insert INTO users (email,firstname, lastname, password) VALUES (?,?,?,?)',[email,firstname, lastname, hash],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
-            if(error) throw error;
-              
-            dbConnection.query('SELECT LAST_INSERT_ID() AS user_id',function(error,results,fields){
-                if(err) throw error;
-                const user_id = results[0];
-                console.log("User id is: ");
-                console.log(user_id);
-                console.log(results[0]);
-                // console.log("User id is: "+ results[0].user_id);
-                //console.log(results[0].hello);
-                //console.log("Above line should be undefined");
-                req.login(user_id,function(err){
-                    res.redirect('/profile');
-                });
+            if(error){
+                console.error(error);
+            } 
+            dbConnection.query("SELECT user_id FROM users WHERE email = ?", [email], (err, results)=> {
+                if(err){
+                    console.error(error);
+                }
+                const user_id = results[0]['user_id'];
+                res.redirect('/user');
+                db.disconnect(dbConnection);
             });
             // else render this page.
         });
-        db.disconnect(dbConnection);
     });  
 });
 module.exports = router;
