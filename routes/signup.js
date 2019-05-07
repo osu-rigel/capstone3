@@ -5,16 +5,19 @@ const saltRounds = 10;
 const db = require ('../utilities/db.js'); 
 
 router.get('/', (req, res) => {
+   
     res.render('SignupUser');
+
 })
 
 router.post('/register', function(req, res, next) {
     console.log (req.body);
-    const firstname = req.body.firstname;
-    const lastname  = req.body.lastname;
-    const email     = req.body.email;
-    const password  = req.body.password;
-    
+    const firstname = req.body.Firstname;
+    const lastname  = req.body.Lastname;
+    const email     = req.body.Username;
+    const password  = req.body.Password;
+  
+     console.log("signup POST() method recieved in signup.js");
     // Pull the database here.
    
     // To hash the password.
