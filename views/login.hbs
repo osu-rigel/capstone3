@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+<h2>Employee Recognition Portal User Login</h2>
+
+<div class ="Form">
+    <form action="/user_page" method="post">
+        <div class = "Form_Layout">
+            <input type="email" placeholder="Enter Email Address" name="Username" required/><br/>
+            <input type="password" placeholder="Enter Password" name="Password" required/><br/>
+            <input type="submit" value="Login">
+            {{{LoginStatus}}}
+            <a href="login/reset"> Forgot Password?</a><br>
+            <a href="/signup"> Sign up here</a><br>
+           
+            
+        </div>
+    </form>
+</div>
+
+
