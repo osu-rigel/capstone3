@@ -105,11 +105,16 @@ const plotlyTest = require('./routes/plotlyTest');
 app.use('/plotlyTest', plotlyTest);
 const awards = require('./routes/awards');
 app.use('/awards', awards);
-
-
-// Upload file stuff.
+const signup = require('./routes/signup');
+app.use('/signup', signup);
+const admin = require('./routes/admin_page');
+app.use('/admin', admin);
+const login = require('./routes/login');
+app.use('/login', login);
 const uploadFile = require('./routes/uploadfile');
 app.use('/upload', uploadFile);
+const user = require('./routes/user_page');
+app.use('/user', user);
 
 passport.use('local_user',new LocalStrategy(
     {
@@ -184,7 +189,7 @@ passport.use('local_admin',new LocalStrategy(
     }
 ));
 
-app.listen(process.env.PORT,process.env.IP,function(err) {
+app.listen(config['PORT_NUM'],function(err) {
  
     if (!err)
         console.log("Site is live");
