@@ -10,7 +10,7 @@ const db = require ('../utilities/db.js');
         "award_dept" : "Backend",
         "award_region" : "Oregon",
         "awardee_email" : "kenhallthe3rd@gmail.com",
-        "awarder_id" : 7,
+        "awarder_ID" : 7,
         "timestamp" : 13579
     },
     {
@@ -19,7 +19,7 @@ const db = require ('../utilities/db.js');
         "award_dept" : "Frontend",
         "award_region" : "California",
         "awardee_email" : "anmistry@gmail.com",
-        "awarder_id" : 4,
+        "awarder_ID" : 4,
         "timestamp" : 12789
     },
     {
@@ -28,7 +28,7 @@ const db = require ('../utilities/db.js');
         "award_dept" : "Backend",
         "award_region" : "Nevada",
         "awardee_email" : "prashara@gmail.com",
-        "awarder_id" : 5,
+        "awarder_ID" : 5,
         "timestamp" : 12347
     }
 ]
@@ -49,31 +49,20 @@ router.get('/', (req, res) => {
     res.render('plotlyTest');
 })
 
-router.get('/awardsGiven', (req, res) => {
+router.get('/load/:field', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }*/
-
-})
-
-router.get('/awardsReceived', (req, res) => {
-    /*if( auth.isLoggedIn(req,res) === 0 ){
-        return;
-    }*/
-    var SQLparams = [];
-    var SQLquery = "";
-    if( req.query['field'] === undefined ){
-        SQLquery = "SELECT * FROM emp_award";
-    }
+    var SQLparams = [ req.params['field'] ];
+    var SQLquery = "SELECT * FROM emp_award";
     var dbConnection = db.connect();
     dbConnection.query(SQLquery, SQLparams, (err, result) => {
-        // parse the results
         var talliedResults = {};
         for( entry in result ){
-            if( talliedResults[ result[entry]['awardee_name'] ] === undefined ){
-                talliedResults[ result[entry]['awardee_name'] ] = 1;
+            if( talliedResults[ result[entry][req.params['field']] ] === undefined ){
+                talliedResults[ result[entry][req.params['field']] ] = 1;
             } else {
-                talliedResults[ result[entry]['awardee_name']] += 1;
+                talliedResults[ result[entry][req.params['field']] ] += 1;
             }
         }
         var output = {
@@ -81,14 +70,13 @@ router.get('/awardsReceived', (req, res) => {
             "y" : [],
             type : "bar"
         };
-        // convert to x and y arrays
+
         for( key in talliedResults ){
             output['x'].push(key);
             output['y'].push(talliedResults[key]);
         }
         res.send(JSON.stringify([output]));
-    });
-    db.disconnect(dbConnection);
+    })
 })
 
 

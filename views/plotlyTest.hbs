@@ -4,10 +4,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
-<p>
-    Here's a simple Plotly plot - 
-    <a href="https://bit.ly/1Or9igj">plotly.js documentation</a>
-</p>
+<select id='plotlyOptions'>
+  <option value='awardee_dept'>Department</option>
+  <option value='awarder_ID'>Giver</option>
+  <option value='awardee_name'>Recipient</option>
+  <option value='awardee_region'>Region</option>
+</select>
+<button id='plotlyLoad'>Load Data</button>
 
 <!-- Plots go in blank <div> elements. 
     You can size them in the plot layout,
