@@ -3,7 +3,7 @@
 <h2>Employee Recogniton Portal User Signup</h2>
 
 <div class ="Form">
-  <form action="/signup/register" method="post">
+  <form action="/signup/register" method="post" enctype="multipart/form-data">
         <div class ="Form_Layout"
             <p></p>
             <input type ="text" placeholder="Enter First Name" id="Firstname" name="Firstname" required><br>
@@ -17,6 +17,7 @@
                 <option value="in which city you were born?">In which city you were born?</option>
             </select>
             <input type ="password" placeholder="" required><br>
+            <input type="file" class="form-control" placeholder="Enter your file here." required> <br>
             <input type ="submit" value="Register">
             <input type ="submit" value="Already a User?Login">
         </div>    
