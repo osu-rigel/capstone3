@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
+var passport   = require('passport');
 const saltRounds = 10;
 const db = require ('../utilities/db.js'); 
 
@@ -48,6 +49,8 @@ router.post('/register', function(req, res, next) {
             console.log(err);
         }else{
           console.log (req.body);
+          console.log("The file object is as shown below.");
+          console.log(req.file);
           const firstname = req.body.firstname;
           const lastname  = req.body.lastname;
           const email     = req.body.email;
@@ -60,7 +63,7 @@ router.post('/register', function(req, res, next) {
           console.log(req.file);
           
           // Pull the database here.
-          const db = require ('../db.js');           // To go down one directory we use .. here.
+          //const db = require ('../db.js');           // To go down one directory we use .. here.
          
          
           // To hash the password.
@@ -74,14 +77,24 @@ router.post('/register', function(req, res, next) {
                 console.log(filename);
                 console.log(filetype);
                 console.log(filesize);
-                dbConnection.query("SELECT user_id FROM users WHERE email = ?", [email], (err, results)=> {
-                if(err){
-                    console.error(error);
-                }
-                const user_id = results[0]['user_id'];
-                res.redirect('/user');
-                db.disconnect(dbConnection);
-            });
+             
+                dbConnection.query('SELECT user_id,firstname FROM users WHERE email = ?', [email],function(error,results,fields){
+                    if(err) throw error;
+                    const user_id = results[0].user_id;
+                    const fname = results[0].firstname;
+                    //console.log("User id is: ");
+                    //console.log(user_id);
+                    
+                    console.log("THe results in register route is: ");
+                    console.log(results[0]);
+                    // console.log("User id is: "+ results[0].user_id);
+                    //console.log(results[0].hello);
+                    //console.log("Above line should be undefined");
+                    req.login(user_id,function(err){
+                        res.render('user_page',{ name: fname, id: user_id});
+                        db.disconnect(dbConnection);
+                    });
+                });
                   // else render this page.
               });
           });

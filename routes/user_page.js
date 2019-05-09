@@ -7,7 +7,9 @@ router.get('/', (req, res) => {
         return;
     }
     // figure out what session they are on and dump them on their user page
-    res.render('user_page');
+    console.log(req.user);
+    
+    res.render('user_page', { title: 'Profile',name: req.user.firstname, id: req.user.user_id });
 })
 
 router.post('/', (request, res) => {
