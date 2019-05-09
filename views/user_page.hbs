@@ -4,7 +4,7 @@
 
 
     <ul>
-        <li><a href=login/user_page">User Profile</a>
+        <li><a href="login/user_page">User Profile</a>
             <ul>
                 <li><a href="#">Add User</a></li>
             </ul>
@@ -15,7 +15,7 @@
                 <li><a href="/searchawards">Search Awards</a></li>
             </ul>
         </li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="/logout">Logout</a></li>
     </ul>
 
 <h3>Welcome {{name}}!</h3>
@@ -25,17 +25,12 @@
 
         <tr>
             <th> Userid</th>
-            <th>Awarder's Username</th>
-            <th>Awarder's Firstname</th>
-            <th>Awarder's Lastname</th>
-            <th>Date</th>
-            <th>Awards</th>
+            <th>Admin Username</th>
         </tr>
         {{#each elements}}
             <tr>
-                //<td>{{this.award_id}}</td>
-                //<td>{{this.awardee_email}}</td>
-                //<td>{{this.awardee_name}}</td>
+                <td>{{this.user_id}}</td>
+                <td>{{this.email}}</td>
 
             </tr>
         {{/each}}

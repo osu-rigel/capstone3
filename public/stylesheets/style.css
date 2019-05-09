@@ -1,9 +1,9 @@
 body {
-    margin: 0;
-    padding: 0;
     background-position: center;
     background: url("background_image.png");
     background-size: cover;
+    margin: 0px;
+    padding: 0px;
 }
 
 h2 {
@@ -126,29 +126,30 @@ a {
     margin: 0 0 15px;
 }
 
-
-
 ul {
     float: right;
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;      
 }
+
 ul li {
-    margin: 3px;
     float: left;
-    width: 100px;
-    height: 40px;
+    margin: 3px;
     background: transparent;
-    border-style: solid;
-    border-color: powderblue;
+    color: inherit;
+    inline-height :40px;
     opacity: 1;
-    line-height: 40px;
-    text-align: center;
+    height: 40px;
+    width: 100px;
     font-size: 14px;
-    display: inline-block;
+    text-align: center;
     position: relative;
+    display: inline-block;
+    border style: solid;
+    border-color: orange;
     font-color: orange;
+
 }
 
 
@@ -156,10 +157,9 @@ ul li a {
     text-decoration: none;
     color: orange;
     display: block;
-    position: realtive;
+    cursor: pointer;
     white-space: nowrap;
 }
-
 
 
 ul li ul li {
@@ -168,9 +168,15 @@ ul li ul li {
 
 ul li:hover ul li {
     display: block;
-    visibility: visible;
 }
 
+ul li a:hover{
+    background-color: gray;
+}
+
+ul li ul li a{
+   cursor: pointer;
+}
 
 table {
     border-style: solid;
