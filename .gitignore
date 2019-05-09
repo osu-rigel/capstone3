@@ -1,3 +1,4 @@
 node_modules
 database/*
 secret_info.json
+public/uploads/*
