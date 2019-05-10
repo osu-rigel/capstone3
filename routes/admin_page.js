@@ -17,6 +17,10 @@ router.get('/signup', (req, res) => {
     res.render('SignupAdmin');
 })
 
+router.get('/login', (req, res) => {
+    res.render('AdminLogin');
+})
+
 router.post('/adminlogin', passport.authenticate(
     'local_admin',{
         successRedirect:'/adminprofile',
