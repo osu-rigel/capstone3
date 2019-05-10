@@ -93,7 +93,7 @@ input[type=password] {
 }
 
 
-input[type=submit], input[type=button] {
+input[type=submit] {
   background-color: darkseagreen;
   color: black;
   padding: 15px;
