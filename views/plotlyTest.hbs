@@ -19,28 +19,4 @@
 <div id="myplotly" style="width:90%;height:250px;"></div>
 <button>Get Chart Data</button>
 
-<script>
-$(document).ready(function(){
-  $("button").click(function(){
-    $.ajax({
-      url : '/plotlyTest/awardsReceived',
-      type : 'GET',
-      success : (body, textStatus, jqXHR) => {
-          console.log(body);
-          Plotly.plot(document.getElementById('myplotly'), JSON.parse(body), {
-              "xaxis" : { 
-                  "title" : "Recipient",
-              },
-              "yaxis" : {
-                  "title" : "Awards"
-              },
-              "title" : "Awards Received"
-          });
-      },
-      error : (jqXHR, textStatus, errorThrown) => {
-          console.error(errorThrown);
-      }
-    })
-  });
-});
-</script>
+<script src='/javascripts/plotly.js'></script>
