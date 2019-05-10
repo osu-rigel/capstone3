@@ -7,7 +7,7 @@ const saltRounds = 10;
 var passport   = require('passport')
 
 router.get('/', (req, res) => {
-    if( auth.isAdminLoggedIn === 0 ){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
         return;
     }
     res.render('admin_page');
