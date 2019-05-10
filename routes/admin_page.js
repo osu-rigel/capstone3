@@ -17,6 +17,10 @@ router.get('/signup', (req, res) => {
     res.render('SignupAdmin');
 })
 
+router.post('/signup', (req, res) => {
+    // TODO : IMPLEMENT ME!
+})
+
 router.get('/login', (req, res) => {
     res.render('AdminLogin');
 })
