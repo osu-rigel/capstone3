@@ -41,7 +41,7 @@ router.post('/addAward', (req, res) => {
         return;
     }
     var dbConnection = db.connect();
-    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['award_dept'], req.body['award_region'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
+    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['award_dept'], req.body['award_region'], req.body['awardee_email'], req.body['awarder_ID'], req.body['timestamp']], (err) => {
         if(err){
             console.error(err);
         }
