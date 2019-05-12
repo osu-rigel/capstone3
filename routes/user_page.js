@@ -46,6 +46,4 @@ router.post('/', (request, res) => {
 
 })
 
-// TODO : more get/post routes for user table manipulations
-
 module.exports = router;
