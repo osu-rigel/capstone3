@@ -3,6 +3,7 @@
 <h2>Employee Recognition Portal/Admin Webpage</h2>
 
 <ul>
+    <li><a href="/plotlyTest">BI Reports</a></li>
     <li><a href="/admin">Admin Profile</a>
         <ul>
             <li><a href="#">Add Admin</a></li>
@@ -15,20 +16,18 @@
             <li><a href="#">Edit user</a></li>
         </ul>
     </li>   
-    <li><a href="#">Logout</a></li>
+    <li><a href="/logout">Logout</a></li>
 </ul>  
 
-<h3>Welcome {{name}}!</h3>
+<h3>Welcome {{email}}!</h3>
 
     <table id = tables>
             <tr>
-                <th>Admin's UserId</th>
                 <th>Admin's Username</th>
             </tr>
             
             {{#each elements}}
             <tr>
-                <td>{{this.user_id}}</td>
                 <td>{{this.email}}</td>
             </tr>
         {{/each}}
