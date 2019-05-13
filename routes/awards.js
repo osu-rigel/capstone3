@@ -51,24 +51,31 @@ router.post('/addAward', (req, res) => {
 });
 
 router.get('/addAward', (req, res) => {
-    if( auth.isLoggedIn(req, res) === 0 ){
-        return;
-    }
+   // if( auth.isLoggedIn(req, res) === 0 ){
+       // return;
+   // }
     res.render('addaward');
 })
 
-router.post('/deleteAward/', (req, res) => {
+router.post('/deleteAward', (req, res) => {
+    console.log("calling /deleteAward POST method of awards.js");
+
     if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }
+    
+    var email_value = Object.keys(req.body);
+    console.log(email_value);
+
     var dbConnection = db.connect();
-    dbConnection.query("DELETE FROM emp_award where ? = ?", [req.body['field'], req.body['value']], (err) => {
+    dbConnection.query("DELETE FROM emp_award where awardee_email = ?", [email_value], (err) => {
         if(err){
             console.error(err);
         }
     })
     db.disconnect(dbConnection);
-    res.sendStatus(200);
+    res.render('user_page');
+    
 })
 
 module.exports = router;

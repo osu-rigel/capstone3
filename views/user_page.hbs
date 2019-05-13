@@ -6,47 +6,54 @@
     <ul>
         <li><a href="login/user_page">User Profile</a>
             <ul>
-                <li><a href="#">Add User</a></li>
+                <li><a href="#">Update User</a></li>
             </ul>
         </li>
-        <li><a href="/addAward">Awards</a></li>
+        <li><a href="#">Awards</a>
+            <ul>
+                <li><a href="awards/addaward">Add Awards</a></li>
+                <li><a href="awards/searchAward">Search Awards</a></li>
+            </ul>
+        </li>
         <li><a href="/logout">Logout</a></li>
     </ul>
 
 <h3>Welcome {{name}}!</h3>
 
-<h4> My awards</h4>   
+
+
+<h4> My awards</h4>
+
+
     <table id = tables>
 
         <tr>
-            <th> Award id</th>
             <th>Award Type</th>
-            <th>Awardee's Name</th>
+            <th>Awardee's Email</th>
             <th>Awardee's Department</th>
             <th>Awardee's Region</th>
-            <th>Awardee's Email</th>
-            <th>Awarder's ID</th>
-            <th>Time</th>
             <th>Delete</th>
              
         </tr>
         {{#each elements}}
             <tr>
-                <td>{{this.award_id}}</td>
+              
                 <td>{{this.award_type}}</td>
-                <td>{{this.awardee_name}}</td>
+                <td>{{this.awardee_email}}</td>
                 <td>{{this.awardee_dept}}</td>
                 <td>{{this.awardee_region}}</td>
-                <td>{{this.awardee_email}}</td>
-                <td>{{this.awarder_ID}}</td>
-                <td>{{this.timestamp}}</td>
-                <td><input type="button" value="Delete" onclick="delete()"/></td>
-
+                
+                <td>
+                <form action="/awards/deleteAward"> 
+                <input type="submit" value="Delete" name={{this.awardee_email}} formmethod="post">
+                </form>
+                </td>
             </tr>
         {{/each}}
     </table>
+
     <br>
-    
+
     <script src="/javascripts/deleteUserpage.js"></script>
 
     <form action="" method="post">
@@ -54,7 +61,6 @@
             <input type="text" placeholder="User name" name="Update" required/>
             <input type="submit" value="Update">
         </div>
-    </form>-->
-
+    </form>
 
     
