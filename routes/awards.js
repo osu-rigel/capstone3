@@ -50,6 +50,13 @@ router.post('/addAward', (req, res) => {
     res.sendStatus(200);
 });
 
+router.get('/addAward', (req, res) => {
+    if( auth.isLoggedIn(req, res) === 0 ){
+        return;
+    }
+    res.render('addaward');
+})
+
 router.post('/deleteAward/', (req, res) => {
     if( auth.isLoggedIn(req,res) === 0 ){
         return;
