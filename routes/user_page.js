@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
     if( auth.isLoggedIn(req, res) === 0 ){
         return;
     }
+    res.render('user_page');
 })
 
 router.post('/', (req, res) => {
