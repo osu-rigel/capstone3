@@ -24,8 +24,12 @@ function getPerson(res, context, user_id, complete){
 
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('Dashboard');
+router.get('/', function(req, res){
+  if( !req.isAuthenticated() ){
+    res.render('Dashboard');
+  } else {
+    res.redirect('/user_page');
+  }
 });
 
 // User profile page.

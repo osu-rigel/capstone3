@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var passport   = require('passport')
+var passport = require('passport');
+const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
-    res.render('login');
+    if( !req.isAuthenticated() ){
+        res.render('login');
+    } else {
+        res.redirect('/user_page');
+    }
 })
 
 router.post('/', passport.authenticate(

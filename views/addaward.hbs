@@ -1,16 +1,15 @@
 <div class ="Form">
-    <form action="addAward" method="post">
+    <form action="/awards/addAward" method="post">
         <div class = "Form_Layout">
-        <select name=Select Award Type>
-                    <option value=1>Employee of the Week</option>
-                    <option value=2>Employee of the Month</option>
+        <select name="award_type">
+            <option value=1>Employee of the Week</option>
+            <option value=2>Employee of the Month</option>
         </select>
-        <input type="text" placeholder="Awardee's First Name" id ="awardee_name" name="Awardee's First Name" required/><br/>
-        <input type="text" placeholder="Awardee's Last Name" id ="awardee_name" name="Awardee's Last Name" required/><br/>
-        <input type="email" placeholder="Awardee's Email Address" id ="awardee_email" name="Awardee's Email Address" required/><br/>
-        <input type="text" placeholder="Awarder's user id" id ="giver_id" name="Awarder's User Id" required/><br/>
-        <input type="text" placeholder="Awarder's Last Name" name="Awarder's Last Name" required/><br/>
-        <input type="password" placeholder="Enter Password" name="Password" required/><br/>
+        <input type="text" placeholder="Awardee's Name" id="awardee_name" name="awardee_name" required/><br/>
+        <input type="email" placeholder="Awardee's Email Address" id="awardee_email" name="awardee_email" required/><br/>
+        <input type="test" placeholder="Awardee's Dept" id="awardee_dept" name="awardee_dept" required><br>
+        <input type="text" placeholder="Awardee's Region" id ="awardee_region" name="awardee_region" required/><br/>
+        <input type="number" placeholder="Unix Timestamp" id="timestamp" name="timestamp" required><br>
         <input type="submit" value="Submit">
         </div>
     </form>
