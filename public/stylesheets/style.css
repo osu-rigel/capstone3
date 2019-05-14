@@ -45,15 +45,6 @@ Form {
     background: transparent;   
 }
 
-.Form_Layout select {
-    padding: 15px;
-    margin: 0 0 15px;
-    border: 2px solid black;
-    outline: 1;
-    width: 91%;
-    background-color: powderblue;
-}
-
 Form_Layout {
     position: relative;
     width: 100%;
@@ -64,6 +55,16 @@ Form_Layout {
     color: deepskyblue;
     position: absolute;
 }
+
+.Form_Layout select {
+    padding: 15px;
+    margin: 0 0 15px;
+    border: 2px solid black;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
+
 
 input[type=text] {
     padding: 15px;
@@ -92,6 +93,14 @@ input[type=password] {
     background-color: powderblue;
 }
 
+input[type=number] {
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
 
 input[type=submit] {
   background-color: darkseagreen;
@@ -178,14 +187,30 @@ ul li ul li a{
    cursor: pointer;
 }
 
-table {
+tables{
     border-style: solid;
     color: darkkhaki;
-    float: left;
+    float: left; 
+    table-layout: auto;
 }
 
-table, td, th {
+tables, td, th {
     border: 1px solid papayawhip;
+    text-align: center;
+    color: darkkhaki;
+    width: auto;
     
 }
 
+#tbutton {
+  color: darkkhaki;
+  border: 1px solid papayawhip;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  width: 20%;
+  padding: 0px;
+  margin: 0px;
+  table-layout: auto;
+
+}
