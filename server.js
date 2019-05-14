@@ -186,7 +186,7 @@ passport.use('local_admin',new LocalStrategy(
     }
 ));
 
-app.listen(config['PORT_NUM'],function(err) {
+app.listen(process.env.PORT,process.env.IP,function(err) {
  
     if (!err)
         console.log("Site is live");
