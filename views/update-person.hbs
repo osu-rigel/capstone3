@@ -1,24 +1,9 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-
-
-   
-</head>
-<body>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     
-    <h1>Update {{person.firstname}} {{person.lastname}}:</h1>
+<h1>Update {{person.firstname}} {{person.lastname}}:</h1>
 <form id="update-person" action="/edit/{{person.user_id}}" method="post">
     First name: <input type="text" name="firstname" value="{{person.firstname}}"><br>
     Last name: <input type="text" name="lastname" value="{{person.lastname}}"><br>
    
-    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Update User" />
-    
+    <input type="submit" value="Update User" />
 </form>
-
-
-
-    
-</body>  
-
-</html>
