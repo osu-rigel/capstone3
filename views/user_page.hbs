@@ -32,7 +32,8 @@
             <th>Awardee's Email</th>
             <th>Awardee's Department</th>
             <th>Awardee's Region</th>
-            <th>Delete</th>
+            <th>Delete Awards</th>
+          
         </tr>
         {{#each elements}}
             <tr>
@@ -41,19 +42,17 @@
                 <td>{{this.awardee_dept}}</td>
                 <td>{{this.awardee_region}}</td>
                 <td><form action="/awards/deleteAward/{{this.award_id}}"> 
-                    <input type="submit" value="DELETE" formmethod="post">
+                <input type="submit" id="tbutton" value="DELETE" formmethod="post">
                 </form></td>
             </tr>
         {{/each}}
     </table>
 
-    <br>
-
-    <form action="" method="post">
+  <!--<form action="" method="post">
         <div class = "Form_Layout">
             <input type="text" placeholder="User name" name="Update" required/>
             <input type="submit" value="Update">
         </div>
-    </form>
+    </form>-->
 
     
