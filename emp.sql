@@ -1,3 +1,6 @@
+/*
+https://remotemysql/myphpadmin.com
+*/
 CREATE TABLE IF NOT EXISTS emp_user
 (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
