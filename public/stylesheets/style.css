@@ -126,6 +126,15 @@ input[type=button] {
   width: 9%;
 }
 
+input[type=file] {
+    padding: 15px;
+    margin: 0 0 15px;
+    border-style: solid;
+    outline: 1;
+    width: 91%;
+    background-color: powderblue;
+}
+
 a {
     font-family: sans- serif;
     color: honeydew;
