@@ -5,7 +5,7 @@ $('#plotlyLoad').on('click', () => {
         type: 'GET',
         success: (body, textStatus, jqXHR) => {
             console.log(body);
-            Plotly.newPlot(document.getElementById('tester'), JSON.parse(body), {
+            Plotly.newPlot(document.getElementById('myPlotly'), JSON.parse(body), {
                 "xaxis" : { 
                     "title" : $('#plotlyOptions option:selected').val()
                 },
