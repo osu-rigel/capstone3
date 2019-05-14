@@ -69,7 +69,7 @@ router.post('/deleteAward/:award_id', (req, res) => {
         }
     })
     db.disconnect(dbConnection);
-    res.render('user_page');
+    res.redirect('/user_page');
 })
 
 module.exports = router;
