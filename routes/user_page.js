@@ -18,10 +18,15 @@ router.get('/', (req, res) => {
         return;
     }
     var connection = db.connect();
+    var name = req.user.firstname;
+    var id = req.user.user_id;
+    console.log("IN profile page user id and name are: ");
+    console.log(name+" "+id);
+    
     connection.query('SELECT award_id, award_type, awardee_email, awardee_dept, awardee_region FROM emp_award WHERE awarder_ID = ?', [req.user['user_id']], function(error, results, fields) {
     if (error) throw error;
         console.log('The query data is: ', results);
-        res.render('user_page', {elements: results});
+        res.render('user_page', {elements: results,name: name, id: id});
     }); 
     db.disconnect(connection); 
 })

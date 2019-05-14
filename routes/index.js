@@ -32,13 +32,13 @@ router.get('/', function(req, res){
   }
 });
 
-// User profile page.
-router.get('/profile', (req, res, next) => {
-  console.log(req.user.firstname);
-  console.log ("The below options show req.user id ");
-  console.log(req.user.user_id);
-  res.render('profile', { title: 'Profile',name: req.user.firstname, id: req.user.user_id });
-});
+// // User profile page.
+// router.get('/profile', (req, res, next) => {
+//   console.log(req.user.firstname);
+//   console.log ("The below options show req.user id ");
+//   console.log(req.user.user_id);
+//   res.render('profile', { title: 'Profile',name: req.user.firstname, id: req.user.user_id });
+// });
 
 // logout route
 router.get('/logout', (req, res, next) => {
@@ -83,7 +83,8 @@ router.get('/logout', (req, res, next) => {
         var dbConnection = db.connect();
         dbConnection.query(sql,inserts,function(error, results, fields){
             if(error) throw error;
-            res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
+            //res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
+            res.redirect('/user_page');                                                                      // Check how to dynamically show my user firstname changed.
         });
         db.disconnect(dbConnection);
     });
