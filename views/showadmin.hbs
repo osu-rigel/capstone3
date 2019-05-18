@@ -1,0 +1,20 @@
+
+<h2>{{title}}</h2>
+
+<a href="/admin/newadmin">Add Admin</a>
+<a href="/admin">Back</a>
+<table id = tables>
+            <tr>
+                <th>Admin Id</th>
+                <th>Admin Email</th>
+                <th> Actions</th>
+            </tr>
+            
+            {{#each admins}}
+            <tr>
+                <td>{{this.user_id}}</td>
+                <td>{{this.email}}</td>
+                <td><a href="#">Edit</a><a href="#">Delete</a></td>
+            </tr>
+        {{/each}}
+</table>

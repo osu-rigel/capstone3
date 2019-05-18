@@ -4,11 +4,9 @@ var passport = require('passport');
 const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
-    if( !req.isAuthenticated() ){
-        res.render('login');
-    } else {
-        res.redirect('/user_page');
-    }
+    
+    res.render('login');
+    
 })
 
 router.post('/', passport.authenticate(
