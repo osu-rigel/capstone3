@@ -1,8 +1,10 @@
 const express = require('express');
 var router = express.Router();
-const fs = require('fs');
 const db = require ('../utilities/db.js');
 const auth = require('../utilities/authenticate.js');
+const emailer = require('../utilities/emailer.js');
+const latex = require('node-latex');
+const fs = require('fs');
 
 // init table
 var dbConnection = db.connect();
@@ -40,13 +42,33 @@ router.post('/addAward', (req, res) => {
         res.sendStatus(400);
         return;
     }
+    // convert string date to numeric Unix timestamp for storage in table
+    var unixDate = new Date(req.body['timestamp']);
+    unixDate = unixDate.getTime() / 1000; 
     var dbConnection = db.connect();
-    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_dept'], req.body['awardee_region'], req.body['awardee_email'], req.user['user_id'], req.body['timestamp']], (err) => {
+    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_dept'], req.body['awardee_region'], req.body['awardee_email'], req.user['user_id'], unixDate], (err) => {
         if(err){
             console.error(err);
         }
     })
     db.disconnect(dbConnection);
+    var latexTemplate = fs.readFileSync("./utilities/input.tex", "utf8");
+    if( req.body['award_type'] === 1 ){
+        var award_type = "Employee of the Month";
+    } else {
+        var award_type = "Employee of the Week";
+    }
+    latexTemplate = latexTemplate.replace('AWARD', award_type);
+    latexTemplate = latexTemplate.replace('DATE', req.body['timestamp']);
+    // TODO : get user signature into LaTex
+    latexTemplate = latexTemplate.replace('SIGNATURE', req.user.user_id);
+    var pdfSaveStream = fs.createWriteStream('./utilities/PDFs/output.pdf');
+    var pdf = latex(latexTemplate);
+    pdf.pipe(pdfSaveStream);
+    pdf.on('finish', () => {
+        emailer(req.body['awardee_email'], "You have received an award", "<p>See attached for your award</p>", "./utilities/PDFs/output.pdf");
+    })
+
     res.redirect('/user_page');
 });
 
@@ -54,7 +76,9 @@ router.get('/addAward', (req, res) => {
    // if( auth.isLoggedIn(req, res) === 0 ){
        // return;
    // }
-    res.render('addaward');
+    res.render('addaward', {
+        layout: false
+    });
 })
 
 router.post('/deleteAward/:award_id', (req, res) => {

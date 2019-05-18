@@ -4,9 +4,13 @@ var passport = require('passport');
 const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
-    
-    res.render('login');
-    
+    if( !req.isAuthenticated() ){
+        res.render('login', {
+            layout: false
+        });
+    } else {
+        res.redirect('/user_page');
+    }
 })
 
 router.post('/', passport.authenticate(
@@ -17,11 +21,15 @@ router.post('/', passport.authenticate(
 );
 
 router.get('/reset', (req, res) => {
-    res.render("Reset");
+    res.render("Reset", {
+        layout: false
+    });
 })
 
 router.get('/create_pass', (req, res) => {
-    res.render('CreatePassword');
+    res.render('CreatePassword', {
+        layout: false
+    });
 })
 
 /*

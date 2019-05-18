@@ -4,13 +4,18 @@ const db = require ('../utilities/db.js');
 const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
-    res.render('fileupload');
+    res.render('fileupload', {
+        layout: false
+    });
 });
 
 router.post('/', (req, res) => {
     global.upload(req,res,function(err){
         if(err){
-            res.render('fileupload',{msg:err});
+            res.render('fileupload',{
+                msg:err,
+                layout: false
+            });
             console.log(err);
         }else{
           // To go down one directory we use .. here.
@@ -38,15 +43,14 @@ router.post('/', (req, res) => {
             console.log("Image name here as well");
             var imgName = req.file.filename;
             console.log(imgName);
-            res.render('image',{message: message,imgName: imgName});
-            
-            
-            
+            res.render('image',{
+                message: message,
+                imgName: imgName,
+                layout: false
+            });
         }
-        
     });
     //res.send('test');
 })
-
 
 module.exports = router;

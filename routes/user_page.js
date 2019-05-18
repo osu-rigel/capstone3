@@ -26,7 +26,12 @@ router.get('/', (req, res) => {
     connection.query('SELECT award_id, award_type, awardee_email, awardee_dept, awardee_region FROM emp_award WHERE awarder_ID = ?', [req.user['user_id']], function(error, results, fields) {
     if (error) throw error;
         console.log('The query data is: ', results);
-        res.render('user_page', {elements: results,name: name, id: id});
+        res.render('user_page', {
+            elements: results,
+            name: name,
+            id: id,
+            layout: false
+        });
     }); 
     db.disconnect(connection); 
 })

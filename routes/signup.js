@@ -7,7 +7,9 @@ const db = require ('../utilities/db.js');
 
 router.get('/', (req, res) => {
    
-    res.render('SignupUser');
+    res.render('SignupUser', {
+      layout: false
+  });
 
 })
 
@@ -45,7 +47,10 @@ router.get('/', (req, res) => {
 router.post('/register', function(req, res, next) {
   global.upload(req,res,function(err){
         if(err){
-            res.render('fileupload',{msg:err});
+            res.render('fileupload',{
+              msg:err,
+              layout: false
+            });
             console.log(err);
         }else{
           console.log (req.body);
@@ -91,7 +96,11 @@ router.post('/register', function(req, res, next) {
                     //console.log(results[0].hello);
                     //console.log("Above line should be undefined");
                     req.login(user_id,function(err){
-                        res.render('user_page',{ name: fname, id: user_id});
+                        res.render('user_page',{ 
+                          name: fname, 
+                          id: user_id,
+                          layout: false
+                        });
                         db.disconnect(dbConnection);
                     });
                 });

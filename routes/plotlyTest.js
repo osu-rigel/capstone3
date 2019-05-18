@@ -46,7 +46,9 @@ router.get('/', (req, res) => {
     /*if( auth.isLoggedIn(req,res) === 0 ){
         return;
     }*/
-    res.render('plotlyTest');
+    res.render('plotlyTest', {
+        layout: false
+    });
 })
 
 router.get('/load/:field', (req, res) => {
