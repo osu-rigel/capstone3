@@ -16,6 +16,7 @@ function getPerson(res, context, user_id, complete){
         console.log("I am in get person function.")
         console.log(results[0]);
         context.person = results[0];
+        context.layout = false;
         complete();
     });
     db.disconnect(dbConnection);
@@ -26,7 +27,9 @@ function getPerson(res, context, user_id, complete){
 /* GET home page. */
 router.get('/', function(req, res){
   if( !req.isAuthenticated() ){
-    res.render('Dashboard');
+    res.render('Dashboard', {
+      layout: false
+  });
   } else {
     res.redirect('/user_page');
   }

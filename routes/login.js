@@ -5,7 +5,9 @@ const auth = require('../utilities/authenticate.js');
 
 router.get('/', (req, res) => {
     if( !req.isAuthenticated() ){
-        res.render('login');
+        res.render('login', {
+            layout: false
+        });
     } else {
         res.redirect('/user_page');
     }
@@ -19,11 +21,15 @@ router.post('/', passport.authenticate(
 );
 
 router.get('/reset', (req, res) => {
-    res.render("Reset");
+    res.render("Reset", {
+        layout: false
+    });
 })
 
 router.get('/create_pass', (req, res) => {
-    res.render('CreatePassword');
+    res.render('CreatePassword', {
+        layout: false
+    });
 })
 
 /*

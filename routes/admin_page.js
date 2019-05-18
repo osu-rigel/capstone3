@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
     if( auth.isAdminLoggedIn(req,res) === 0 ){
         return;
     }
-    res.render('admin_page');
+    res.render('admin_page', {
+        layout: false
+    });
 })
 
 
@@ -18,7 +20,9 @@ router.get('/', (req, res) => {
 // Admin login page.
 router.get('/login', function(req, res) {
   
-  res.render('AdminLogin');
+  res.render('AdminLogin', {
+      layout: false
+  });
 });
 
 
@@ -32,7 +36,9 @@ router.post('/login', passport.authenticate(
 
 // Admin signup routes.
 router.get('/signup', (req, res) => {
-    res.render('SignupAdmin');
+    res.render('SignupAdmin', {
+        layout: false
+    });
 })
 
 
