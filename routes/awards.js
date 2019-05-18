@@ -42,8 +42,11 @@ router.post('/addAward', (req, res) => {
         res.sendStatus(400);
         return;
     }
+    // convert string date to numeric Unix timestamp for storage in table
+    var unixDate = new Date(req.body['timestamp']);
+    unixDate = unixDate.getTime() / 1000; 
     var dbConnection = db.connect();
-    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_dept'], req.body['awardee_region'], req.body['awardee_email'], req.user['user_id'], req.body['timestamp']], (err) => {
+    dbConnection.query("INSERT INTO emp_award (award_type, awardee_name, awardee_dept, awardee_region, awardee_email, awarder_ID, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body['award_type'], req.body['awardee_name'], req.body['awardee_dept'], req.body['awardee_region'], req.body['awardee_email'], req.user['user_id'], unixDate], (err) => {
         if(err){
             console.error(err);
         }
