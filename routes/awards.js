@@ -1,8 +1,10 @@
 const express = require('express');
 var router = express.Router();
-const fs = require('fs');
 const db = require ('../utilities/db.js');
 const auth = require('../utilities/authenticate.js');
+const emailer = require('../utilities/emailer.js');
+const latex = require('node-latex');
+const fs = require('fs');
 
 // init table
 var dbConnection = db.connect();
@@ -47,6 +49,23 @@ router.post('/addAward', (req, res) => {
         }
     })
     db.disconnect(dbConnection);
+    var latexTemplate = fs.readFileSync("./utilities/input.tex", "utf8");
+    if( req.body['award_type'] === 1 ){
+        var award_type = "Employee of the Month";
+    } else {
+        var award_type = "Employee of the Week";
+    }
+    latexTemplate = latexTemplate.replace('AWARD', award_type);
+    latexTemplate = latexTemplate.replace('DATE', req.body['timestamp']);
+    // TODO : get user signature into LaTex
+    latexTemplate = latexTemplate.replace('SIGNATURE', req.user.user_id);
+    var pdfSaveStream = fs.createWriteStream('./utilities/PDFs/output.pdf');
+    var pdf = latex(latexTemplate);
+    pdf.pipe(pdfSaveStream);
+    pdf.on('finish', () => {
+        emailer(req.body['awardee_email'], "You have received an award", "<p>See attached for your award</p>", "./utilities/PDFs/output.pdf");
+    })
+
     res.redirect('/user_page');
 });
 
