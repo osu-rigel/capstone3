@@ -3,11 +3,14 @@
 <h2>Employee Recognition Portal Add User</h2>
 
 <div class ="Form">
-    <form action="/" method="post">
+    <form action="/admin/newuser" method="post" enctype="multipart/form-data">
         <div class = "Form_Layout">
+            <input type="email" placeholder="Enter Email Address" name="email" required/><br/>
             <input type="text" placeholder="Add user's firstname" name="firstname" required/></br>
             <input type="text" placeholder="Add user's lastname" name="lastname" required/></br>
-            <input type="email" placeholder="Enter Email Address" name="email" required/><br/>
+            <input type="password" placeholder="Enter Password" name="password" required/><br/>
+            <input type="file"  name="myImage" required> <br>
+            
             <input type="submit" value="Add User">           
         </div>
     </form>
