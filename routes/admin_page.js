@@ -79,7 +79,9 @@ router.post('/signup', function(req, res, next) {
 
 // Display admin users.
 router.get('/showadmin',function(req,res,next){
-    
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     var query = 'select * from admin';
     var dbConnection = db.connect();
      dbConnection.query(query, function(err, rows, fields) {
@@ -94,7 +96,9 @@ router.get('/showadmin',function(req,res,next){
 // Display users.
 
 router.get('/showuser',function(req,res,next){
-    
+   if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
    var query = 'select * from users';
     var dbConnection = db.connect();
      dbConnection.query(query, function(err, rows, fields) {
@@ -107,13 +111,18 @@ router.get('/showuser',function(req,res,next){
 });
 
 router.get('/newuser',function(req,res,next){
-    
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     res.render('addUser',{layout: false});
     //res.send("This will be the new user route.");
    
 });
 
 router.post('/newuser', function(req, res, next) {
+  if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
   global.upload(req,res,function(err){
         if(err){
             res.render('addUser',{msg:err, layout: false});
@@ -164,6 +173,9 @@ router.post('/newuser', function(req, res, next) {
 
 // Adding new admin users.
 router.get('/newadmin',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     res.render('addAdmin',{layout: false});
     //res.send("This will be the new admin route.");
 });
@@ -172,6 +184,9 @@ router.get('/newadmin',function(req,res,next){
 
 
 router.post('/newadmin', function(req, res, next) {
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     
     const email     = req.body.email;
     const password  = req.body.password;
@@ -196,6 +211,9 @@ router.post('/newadmin', function(req, res, next) {
 
 // Edit user routes
 router.get('/edit-user/:id',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     
     var id = req.params.id;
     var sql = 'SELECT * FROM users where id = ?';
@@ -214,6 +232,9 @@ router.get('/edit-user/:id',function(req,res,next){
 });
 
 router.post('/edit-user/:id',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     const firstname = req.body.firstname;
     const lastname  = req.body.lastname;
     const email     = req.body.email;
@@ -231,6 +252,9 @@ router.post('/edit-user/:id',function(req,res,next){
 
 // Edit admin routes
 router.get('/edit-admin/:id',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
     var id = req.params.id;
     var sql = 'SELECT * FROM users where id = ?';
     var dbConnection = db.connect();
@@ -248,9 +272,12 @@ router.get('/edit-admin/:id',function(req,res,next){
 
 
 router.post('/edit-admin/:id',function(req,res,next){
-   const email     = req.body.email;
+        if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
+        const email     = req.body.email;
     
-    var sql = "UPDATE admin SET email=? WHERE user_id=?";
+        var sql = "UPDATE admin SET email=? WHERE user_id=?";
         var inserts = [req.body.email, req.params.id];
         var dbConnection = db.connect();
         dbConnection.query(sql,inserts,function(error, results, fields){
@@ -263,5 +290,38 @@ router.post('/edit-admin/:id',function(req,res,next){
     
 });
 
+
+// Delete routes 
+router.get('/delete-user/:id',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
+    var id = req.params.id;
+    var sql = "DELETE FROM users WHERE user_id=?"; 
+    var dbConnection = db.connect();
+    dbConnection.query(sql,[id],function(error, results, fields){
+            if(error) {
+               console.log(error);
+            }
+            res.redirect('/admin/showuser');                                                                      // Check how to dynamically show my user firstname changed.
+    });
+    db.disconnect(dbConnection);
+});
+
+router.get('/delete-admin/:id',function(req,res,next){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
+        return;
+    }
+    var id = req.params.id;
+    var sql = "DELETE FROM admin WHERE user_id=?"; 
+    var dbConnection = db.connect();
+    dbConnection.query(sql,[id],function(error, results, fields){
+            if(error) {
+               console.log(error);
+            }
+            res.redirect('/admin/showadmin');                                                                      // Check how to dynamically show my user firstname changed.
+    });
+    db.disconnect(dbConnection);
+});
 
 module.exports = router;

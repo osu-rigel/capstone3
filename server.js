@@ -123,7 +123,7 @@ passport.use('local_user',new LocalStrategy(
         // handle error for invalid email as well.
         // This will give us user_id ,firstname and password in results.We can modify admin in similar fashion.
         var dbConnection = db.connect();
-        dbConnection.query('SELECT user_id,firstname, password FROM users WHERE email=?',[email],function(err,results,fields){
+        dbConnection.query('SELECT user_id,firstname, password,user_type FROM users WHERE email=?',[email],function(err,results,fields){
             if(err){
                 done(err) };
             console.log("Results length is: "+ results.length);
@@ -135,6 +135,9 @@ passport.use('local_user',new LocalStrategy(
             const hash = results[0].password;
         
             bcrypt.compare(password,hash,function(err,response){
+                console.log("The response is: ");
+                console.log(response);
+                
                 if(response === true){
                     console.log(results[0].user_id);
                     console.log(results[0]);
