@@ -1,36 +1,21 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 
-<h2>Employee Recognition Portal/Admin Webpage</h2>
+<h2>Employee Recognition Portal Admin Webpage</h2>
 
 <ul>
     <li><a href="/plotlyTest">BI Reports</a></li>
     <li><a href="/admin">Admin Profile</a>
         <ul>
             <li><a href="/admin/showadmin">Show Admin</a></li>
-            <li><a href="#">Add Admin</a></li>
-            <li><a href="#">Edit Admin</a></li>
+            <li><a href="/admin/newadmin">Add Admin</a></li>
         </ul>
     </li>
     <li><a href="#">User Profile</a>            
         <ul>
             <li><a href="/admin/showuser">Show User</a></li>
-            <li><a href="#">Add user</a></li>
-            <li><a href="#">Edit user</a></li>
+            <li><a href="/admin/newuser">Add user</a></li>
         </ul>
     </li>   
     <li><a href="/logout">Logout</a></li>
 </ul>  
 
-<h3>Welcome {{email}}!</h3>
-
-    <table id = tables>
-            <tr>
-                <th>Admin's Username</th>
-            </tr>
-            
-            {{#each elements}}
-            <tr>
-                <td>{{this.email}}</td>
-            </tr>
-        {{/each}}
-</table>
