@@ -84,7 +84,7 @@ router.get('/showadmin',function(req,res,next){
     var dbConnection = db.connect();
      dbConnection.query(query, function(err, rows, fields) {
        if (err) throw err;
-       res.render('showadmin', { title: 'Admin List', admins: rows});
+       res.render('showadmin', { title: 'Admin List', admins: rows , layout: false});
        db.disconnect(dbConnection);
        
     })
@@ -99,7 +99,7 @@ router.get('/showuser',function(req,res,next){
     var dbConnection = db.connect();
      dbConnection.query(query, function(err, rows, fields) {
        if (err) throw err;
-       res.render('showuser', { title: 'User List', users: rows});
+       res.render('showuser', { title: 'User List', users: rows , layout: false});
        db.disconnect(dbConnection);
        
     })
@@ -108,7 +108,7 @@ router.get('/showuser',function(req,res,next){
 
 router.get('/newuser',function(req,res,next){
     
-    res.render('addUser');
+    res.render('addUser',{layout: false});
     //res.send("This will be the new user route.");
    
 });
@@ -116,7 +116,7 @@ router.get('/newuser',function(req,res,next){
 router.post('/newuser', function(req, res, next) {
   global.upload(req,res,function(err){
         if(err){
-            res.render('addUser',{msg:err});
+            res.render('addUser',{msg:err, layout: false});
             console.log(err);
         }else{
          
@@ -164,7 +164,7 @@ router.post('/newuser', function(req, res, next) {
 
 // Adding new admin users.
 router.get('/newadmin',function(req,res,next){
-    res.render('addAdmin');
+    res.render('addAdmin',{layout: false});
     //res.send("This will be the new admin route.");
 });
 
@@ -192,6 +192,75 @@ router.post('/newadmin', function(req, res, next) {
         });
         
     });
+});
+
+// Edit user routes
+router.get('/edit-user/:id',function(req,res,next){
+    
+    var id = req.params.id;
+    var sql = 'SELECT * FROM users where id = ?';
+    var dbConnection = db.connect();
+    dbConnection.query('SELECT * FROM users where user_id = ?',[id],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
+            if(error) {
+               console.log(error);
+            }
+            res.render('editUser',{layout: false , user: results[0], id: id});
+    
+            db.disconnect(dbConnection);
+            
+            
+        });
+    
+});
+
+router.post('/edit-user/:id',function(req,res,next){
+    const firstname = req.body.firstname;
+    const lastname  = req.body.lastname;
+    const email     = req.body.email;
+    
+    var sql = "UPDATE users SET firstname=?, lastname=? , email=? WHERE user_id=?";
+        var inserts = [req.body.firstname, req.body.lastname, req.body.email, req.params.id];
+        var dbConnection = db.connect();
+        dbConnection.query(sql,inserts,function(error, results, fields){
+            if(error) throw error;
+            res.redirect('/admin/showuser');                                                                      // Check how to dynamically show my user firstname changed.
+        });
+        db.disconnect(dbConnection);
+    
+});
+
+// Edit admin routes
+router.get('/edit-admin/:id',function(req,res,next){
+    var id = req.params.id;
+    var sql = 'SELECT * FROM users where id = ?';
+    var dbConnection = db.connect();
+    dbConnection.query('SELECT * FROM admin where user_id = ?',[id],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
+            if(error) {
+               console.log(error);
+            }
+            res.render('editAdmin',{layout: false , admin: results[0] , id: id});
+    
+            db.disconnect(dbConnection);
+            
+            
+        });
+});
+
+
+router.post('/edit-admin/:id',function(req,res,next){
+   const email     = req.body.email;
+    
+    var sql = "UPDATE admin SET email=? WHERE user_id=?";
+        var inserts = [req.body.email, req.params.id];
+        var dbConnection = db.connect();
+        dbConnection.query(sql,inserts,function(error, results, fields){
+            if(error) {
+               console.log(error);
+            }
+            res.redirect('/admin/showadmin');                                                                      // Check how to dynamically show my user firstname changed.
+        });
+        db.disconnect(dbConnection);
+    
 });
 
 

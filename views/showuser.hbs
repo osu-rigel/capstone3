@@ -18,7 +18,8 @@
                 <td>{{this.email}}</td>
                 <td>{{this.firstname}}</td>
                 <td>{{this.lastname}}</td>
-                <td><a href="#">Edit</a><a href="#">Delete</a></td>
+                <td><a href="/admin/edit-user/{{this.user_id}}">Edit</a>
+                <a href="#">Delete</a></td>
             </tr>
         {{/each}}
 </table>

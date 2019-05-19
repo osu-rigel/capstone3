@@ -3,11 +3,11 @@
 <h2>Employee Recognition Portal Edit Admin User</h2>
 
 <div class ="Form">
-    <form action="/" method="post">
+    <form action="/admin/edit-admin/{{id}}" method="post">
         <div class = "Form_Layout">
-            <input type="email" placeholder="Enter Email Address" name="email" required/><br/>
+            <input type="email" value={{admin.email}} name="email" required/><br/>
             <input type="submit" value="Edit Admin">  
-            <input type="submit" value="Delete Admin">
+            
         </div>
     </form>
 </div>

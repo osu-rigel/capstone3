@@ -85,8 +85,9 @@ router.get('/logout', (req, res, next) => {
         var inserts = [req.body.firstname, req.body.lastname, req.params.id];
         var dbConnection = db.connect();
         dbConnection.query(sql,inserts,function(error, results, fields){
-            if(error) throw error;
-            //res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
+            if(error) {
+                console.log(error);
+            }
             res.redirect('/user_page');                                                                      // Check how to dynamically show my user firstname changed.
         });
         db.disconnect(dbConnection);

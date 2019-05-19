@@ -2,14 +2,16 @@
 
 <h2>Employee Recognition Portal Edit User</h2>
 
+
+
 <div class ="Form">
-    <form action="/" method="post">
+    <form action="/admin/edit-user/{{id}}" method="post">
         <div class = "Form_Layout">
-            <input type="text" placeholder="Add user's firstname" name="firstname" required/></br>
-            <input type="text" placeholder="Add user's lastname" name="lastname" required/></br>
-            <input type="email" placeholder="Enter Email Address" name="email" required/></br>
+            <input type="text" value= {{user.firstname}} name="firstname" required/></br>
+            <input type="text" value= {{user.lastname}} name="lastname" required/></br>
+            <input type="email" value= {{user.email}} name="email" required/></br>
             <input type="submit" value="Edit User">  
-            <input type="submit" value="Delete User">     
+               
         </div>
     </form>
 </div>
