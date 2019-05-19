@@ -1,20 +1,23 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/adminStyle.css">
 
-<h2>{{title}}</h2>
+<h2>Employee Recognition Portal Admin List</h2>
 
-<a href="/admin/newadmin">Add Admin</a>
-<a href="/admin">Back</a>
+<a href="/admin">Back to AdminPage</a>
+
 <table id = tables>
             <tr>
                 <th>Admin Id</th>
                 <th>Admin Email</th>
-                <th> Actions</th>
+                <th>Actions</th>
+                <th>Actions</th>
             </tr>
             
             {{#each admins}}
             <tr>
                 <td>{{this.user_id}}</td>
                 <td>{{this.email}}</td>
-                <td><a href="#">Edit</a><a href="#">Delete</a></td>
+                <td><a href="#">Edit</a></td>
+                <td><a href="#">Delete</a></td>
             </tr>
         {{/each}}
 </table>

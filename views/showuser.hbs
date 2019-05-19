@@ -1,7 +1,8 @@
-<h2>{{title}}</h2>
+<link rel="stylesheet" type="text/css" href="/stylesheets/adminStyle.css">
 
-<a href="/admin/newuser">Add User</a>
-<a href="/admin"> Back</a>
+<h2>Employee Recognition Portal User List</h2>
+
+<a href="/admin"> Back to AdminPage</a>
 
 <table id = tables>
             <tr>
@@ -9,7 +10,8 @@
                 <th>Email</th>
                 <th>FirstName</th>
                 <th>LastName</th>
-                <th> Actions</th>
+                <th>Actions</th>
+                <th>Actions</th>
             </tr>
             
             {{#each users}}
@@ -18,7 +20,8 @@
                 <td>{{this.email}}</td>
                 <td>{{this.firstname}}</td>
                 <td>{{this.lastname}}</td>
-                <td><a href="#">Edit</a><a href="#">Delete</a></td>
+                <td><a href="#">Edit</a></td>
+                <td><a href="#">Delete</a></td>
             </tr>
         {{/each}}
 </table>
