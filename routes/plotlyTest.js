@@ -78,6 +78,7 @@ router.get('/load/:field', (req, res) => {
             output['y'].push(talliedResults[key]);
         }
         res.send(JSON.stringify([output]));
+        db.disconnect(dbConnection);
     })
 })
 
