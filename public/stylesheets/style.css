@@ -12,18 +12,17 @@ h2 {
     font-family: sans-serif;
     color: darkorange;
     text-shadow: 2px 2px black;
+    
 }
 
 h3 {
-    text-align: center;
+    text-align: left;
     font-size: 18px;
     font-family: sans-serif;
     color: cornflowerblue;
-    text-align: center;
 }
 
 h4 {
-    text-align: center;
     font-size: 18px;
     font-family: sans-serif;
     color: goldenrod;
@@ -153,16 +152,16 @@ ul {
 
 ul li {
     float: left;
-    margin: 3px;
+    margin-top: 3px;
     background: transparent;
     color: inherit;
     inline-height :40px;
     opacity: 1;
     height: 40px;
-    width: 100px;
+    width: 88px;
     font-size: 14px;
     text-align: center;
-    position: relative;
+    position: realtive;
     display: inline-block;
     border style: solid;
     border-color: orange;
