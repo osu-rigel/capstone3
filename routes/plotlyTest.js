@@ -74,7 +74,7 @@ router.get('/load/:field', (req, res) => {
         };
 
         for( key in talliedResults ){
-            output['x'].push(key);
+            output['x'].push("-" + key + "-");
             output['y'].push(talliedResults[key]);
         }
         res.send(JSON.stringify([output]));
