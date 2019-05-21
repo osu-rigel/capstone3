@@ -50,23 +50,29 @@ router.post('/addAward', (req, res) => {
         if(err){
             console.error(err);
         }
-    })
-    db.disconnect(dbConnection);
-    var latexTemplate = fs.readFileSync("./utilities/input.tex", "utf8");
-    if( req.body['award_type'] === 1 ){
-        var award_type = "Employee of the Month";
-    } else {
-        var award_type = "Employee of the Week";
-    }
-    latexTemplate = latexTemplate.replace('AWARD', award_type);
-    latexTemplate = latexTemplate.replace('DATE', req.body['timestamp']);
-    // TODO : get user signature into LaTex
-    latexTemplate = latexTemplate.replace('SIGNATURE', req.user.user_id);
-    var pdfSaveStream = fs.createWriteStream('./utilities/PDFs/output.pdf');
-    var pdf = latex(latexTemplate);
-    pdf.pipe(pdfSaveStream);
-    pdf.on('finish', () => {
-        emailer(req.body['awardee_email'], "You have received an award", "<p>See attached for your award</p>", "./utilities/PDFs/output.pdf");
+        dbConnection.query("SELECT filename FROM users WHERE user_id = ?", [req.user.user_id], (error, results, fields) => {
+            var signatureFilepath = __dirname + '/../public/uploads/' + results[0]['filename'];
+            var latexTemplate = fs.readFileSync("./utilities/input.tex", "utf8");
+            if( req.body['award_type'] === 1 ){
+                var award_type = "Employee of the Month";
+            } else {
+                var award_type = "Employee of the Week";
+            }
+            latexTemplate = latexTemplate.replace('AWARD', award_type);
+            latexTemplate = latexTemplate.replace('DATE', req.body['timestamp']);
+            // TODO : get user signature into LaTex
+            latexTemplate = latexTemplate.replace('SIGNATURE', signatureFilepath);
+            if( !fs.existsSync('./utilities/PDFs') ){
+                fs.mkdirSync('./utilities/PDFs');
+            }
+            var pdfSaveStream = fs.createWriteStream('./utilities/PDFs/output.pdf');
+            var pdf = latex(latexTemplate);
+            pdf.pipe(pdfSaveStream);
+            pdf.on('finish', () => {
+                emailer(req.body['awardee_email'], "You have received an award", "<p>See attached for your award</p>", "./utilities/PDFs/output.pdf");
+            })
+        })
+        db.disconnect(dbConnection);
     })
 
     res.redirect('/user_page');
