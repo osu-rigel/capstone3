@@ -50,7 +50,8 @@ router.post('/addAward', (req, res) => {
         if(err){
             console.error(err);
         }
-        dbConnection.query("SELECT filename FROM users WHERE user_id = ?", [req.user.user_id], (error, results, fields) => {
+        dbConnection.query("SELECT firstname, lastname, filename FROM users WHERE user_id = ?", [req.user.user_id], (error, results, fields) => {
+            console.log(results);
             var signatureFilepath = __dirname + '/../public/uploads/' + results[0]['filename'];
             var latexTemplate = fs.readFileSync("./utilities/input.tex", "utf8");
             if( req.body['award_type'] === 1 ){
@@ -60,7 +61,8 @@ router.post('/addAward', (req, res) => {
             }
             latexTemplate = latexTemplate.replace('AWARD', award_type);
             latexTemplate = latexTemplate.replace('DATE', req.body['timestamp']);
-            // TODO : get user signature into LaTex
+            latexTemplate = latexTemplate.replace('RECIPIENT', req.body['awardee_name']);
+            latexTemplate = latexTemplate.replace('GIVER', results[0]['firstname'] + " " + results[0]['lastname']);
             latexTemplate = latexTemplate.replace('SIGNATURE', signatureFilepath);
             if( !fs.existsSync('./utilities/PDFs') ){
                 fs.mkdirSync('./utilities/PDFs');

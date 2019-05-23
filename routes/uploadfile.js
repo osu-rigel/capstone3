@@ -38,6 +38,7 @@ router.post('/', (req, res) => {
                 // });
                
             });
+            // TODO : check uploadable files against LaTeX renderable graphics; file types, max file sizes 
             db.disconnect(dbConnection);
             var message = "Successfully! uploaded";
             console.log("Image name here as well");
