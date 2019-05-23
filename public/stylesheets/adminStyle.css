@@ -1,0 +1,89 @@
+body {
+    background-position: center;
+    background: url("background_image.png");
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    color: darkorange;
+    text-shadow: 2px 2px black;
+}
+
+h3 {
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: cornflowerblue;
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: goldenrod;
+    text-align: left;
+}    
+
+p {
+   margin: 30px;
+   text-align: center;
+   font-size: 16px;
+   font-family: sans-serif; 
+   color: gold;
+}
+a {
+    font-family: sans- serif;
+    color: orange;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px;
+    margin: 5px;
+    float: right;
+}
+
+a:hover{
+    background-color: gray;
+}
+
+#tables{
+    border-style: solid;
+    color: darkkhaki;
+    float: left; 
+    table-layout: auto;
+}
+
+#tables td, th {
+    border: 1px solid papayawhip;
+    color: darkkhaki;
+    text-align: center;
+    align: center;
+}
+
+#tables input[type=submit]{
+    background-color: transparent;
+    color: darkkhaki;
+    border: none;
+    align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-top: 10px;
+}
+
+#tables input[type=submit]:hover {
+    background-color: darkseagreen;
+    color: white;
+}
+
+#tables tr:hover {
+    background-color: peachpuff;
+}
+

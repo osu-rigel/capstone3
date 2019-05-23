@@ -1,0 +1,95 @@
+body {
+    background-position: center;
+    background: url("background_image.png");
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    color: darkorange;
+    text-shadow: 2px 2px black;
+    display: block;
+    margin-left: 290px;  
+}
+
+p {
+   margin-right: 300px;
+   text-align: center;
+   font-size: 16px;
+   font-family: sans-serif; 
+   color: gold;
+}
+
+.header img {
+    opacity: 0.9;
+    float: left;
+    width: 200px;
+    height: auto;
+    display: inline-block; 
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    font-family: sans- serif;
+    color: honeydew;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px;;
+    margin-top: 15px;
+}
+
+ul {
+    float: right;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;      
+}
+
+ul li {
+    float: left;
+    margin-top: 3px;
+    background: transparent;
+    color: inherit;
+    inline-height :40px;
+    opacity: 1;
+    height: 40px;
+    width: 88px;
+    font-size: 14px;
+    text-align: center;
+    position: realtive;
+    display: inline-block;
+    border style: solid;
+    border-color: orange;
+    font-color: orange;
+
+}
+
+ul li a {
+    text-decoration: none;
+    color: orange;
+    display: block;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+
+ul li ul li {
+    display: none;
+}
+
+ul li:hover ul li {
+    display: block;
+}
+
+ul li a:hover{
+    background-color: gray;
+}
+
+ul li ul li a{
+   cursor: pointer;
+}

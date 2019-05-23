@@ -1,9 +1,14 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     
-<h1>Update {{person.firstname}} {{person.lastname}}:</h1>
+<h2>Update {{person.firstname}} {{person.lastname}}</h2>
+
+<a href="/user_page" style="color:orange;float:right;">Back to UserPage</a>
+
 <form id="update-person" action="/edit/{{person.user_id}}" method="post">
-    First name: <input type="text" name="firstname" value="{{person.firstname}}"><br>
-    Last name: <input type="text" name="lastname" value="{{person.lastname}}"><br>
+    <input type="text" name="firstname" value="{{person.firstname}}"><br>
+    <input type="text" name="lastname" value="{{person.lastname}}"><br>
    
     <input type="submit" value="Update User" />
 </form>

@@ -1,21 +1,24 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<h2>{{title}}</h2>
+<link rel="stylesheet" type="text/css" href="/stylesheets/adminStyle.css">
 
-<a href="/admin/newadmin">Add Admin</a>
-<a href="/admin">Back</a>
+<h2>Employee Recognition Portal Admin List</h2>
+
+<a href="/admin">Back to AdminPage</a>
+
 <table id = tables>
             <tr>
                 <th>Admin Id</th>
                 <th>Admin Email</th>
-                <th> Actions</th>
+                <th>Actions</th>
             </tr>
             
             {{#each admins}}
             <tr>
                 <td>{{this.user_id}}</td>
                 <td>{{this.email}}</td>
-                <td><a href="/admin/edit-admin/{{this.user_id}}">Edit</a>
-                <a href="/admin/delete-admin/{{this.user_id}}">Delete</a></td>
+                <td><a href="/admin/edit-admin/{{this.user_id}}">Edit</a></td>
+                <td><a href="/admin/delete-admin/{{this.user_id}}">Delete</a></td>
             </tr>
         {{/each}}
 </table>
