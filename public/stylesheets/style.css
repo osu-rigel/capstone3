@@ -12,18 +12,17 @@ h2 {
     font-family: sans-serif;
     color: darkorange;
     text-shadow: 2px 2px black;
+    
 }
 
 h3 {
-    text-align: center;
+    text-align: left;
     font-size: 18px;
     font-family: sans-serif;
     color: cornflowerblue;
-    text-align: center;
 }
 
 h4 {
-    text-align: center;
     font-size: 18px;
     font-family: sans-serif;
     color: goldenrod;
@@ -93,7 +92,7 @@ input[type=password] {
     background-color: powderblue;
 }
 
-input[type=number] {
+input[type=date] {
     padding: 15px;
     margin: 0 0 15px;
     border-style: solid;
@@ -140,8 +139,8 @@ a {
     color: honeydew;
     text-decoration: none;
     font-size: 14px;
-    padding: 0;
-    margin: 0 0 15px;
+    padding: 5px;;
+    margin-top: 15px;
 }
 
 ul {
@@ -153,16 +152,16 @@ ul {
 
 ul li {
     float: left;
-    margin: 3px;
+    margin-top: 3px;
     background: transparent;
     color: inherit;
     inline-height :40px;
     opacity: 1;
     height: 40px;
-    width: 100px;
+    width: 88px;
     font-size: 14px;
     text-align: center;
-    position: relative;
+    position: realtive;
     display: inline-block;
     border style: solid;
     border-color: orange;
@@ -196,30 +195,47 @@ ul li ul li a{
    cursor: pointer;
 }
 
-tables{
+#tables{
     border-style: solid;
     color: darkkhaki;
     float: left; 
     table-layout: auto;
 }
 
-tables, td, th {
+#tables td, th {
     border: 1px solid papayawhip;
-    text-align: center;
     color: darkkhaki;
-    width: auto;
+}
+
+#tables td.shrink{
+    white-space: nowrap;
+}
+
+#tables input[type=submit]{
+    background-color: gray;
+    width: 15%;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
     
 }
 
-#tbutton {
-  color: darkkhaki;
-  border: 1px solid papayawhip;
-  background: transparent;
-  cursor: pointer;
-  overflow: hidden;
-  width: 20%;
-  padding: 0px;
-  margin: 0px;
-  table-layout: auto;
+#plotlyOptions{
+    padding: 10px;
+    margin: 0 0 10px;
+    border: 2px solid black;
+    outline: 1;
+    width: 15%;
+    background-color: powderblue;
+}
 
+#plotlyLoad{
+    background-color: darkseagreen;
+    border: 2px solid black;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    width: 6%;
+    
 }

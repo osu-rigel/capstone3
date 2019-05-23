@@ -1,4 +1,6 @@
-<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/userpageStyle.css">
 
 <h2>Employee Recognition Portal User Webpage</h2>
 
@@ -12,20 +14,19 @@
         <li><a href="#">Awards</a>
             <ul>
                 <li><a href="awards/addaward">Add Awards</a></li>
-                <li><a href="awards/searchAward">Search Awards</a></li>
             </ul>
         </li>
         <li><a href="/logout">Logout</a></li>
     </ul>
 
-<h3>Welcome {{name}}!</h3>
+<h3>Welcome {{name}} !</h3>
 
 
 
 <h4> My awards</h4>
 
 
-    <table id = tables>
+    <table id="tables">
 
         <tr>
             <th>Award Type</th>
@@ -42,17 +43,10 @@
                 <td>{{this.awardee_dept}}</td>
                 <td>{{this.awardee_region}}</td>
                 <td><form action="/awards/deleteAward/{{this.award_id}}"> 
-                <input type="submit" id="tbutton" value="DELETE" formmethod="post">
+                <input type="submit" value="DELETE" formmethod="post">
                 </form></td>
             </tr>
         {{/each}}
     </table>
-
-  <!--<form action="" method="post">
-        <div class = "Form_Layout">
-            <input type="text" placeholder="User name" name="Update" required/>
-            <input type="submit" value="Update">
-        </div>
-    </form>-->
 
     

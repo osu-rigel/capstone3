@@ -1,6 +1,104 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{graphicx}
+
+
 \begin{document}
-Congratulations you have won the AWARD award\linebreak
-Date : DATE\linebreak
-Signed : SIGNATURE
+    \pagestyle{empty}
+        \begin{tikzpicture}[remember picture, overlay]
+            \draw[line width=2pt] ($(current page.north west) + (1in, -0.5in)$) rectangle ($(current page.south east) + (-0.5in, 1in)$);
+        \end{tikzpicture}
+    
+    \begin{title} \\
+    \begin{center}
+    \textbf{{\normalsize \color{orange} Employee Recognition Portal}}\\
+    \vspace{2em}
+    \textbf{{\Large Certificate of Appreciation}}\\
+    \vspace{2em}
+    This certificate is awarded to - name of the employee\\
+    \vspace{2em}
+    \textbf{{\normalsize \color{red} CONGRATULATIONS!}}\\
+    \color{black}In recognition of your outstanding dedication, passion and hard work\\
+    You have won an award for \color{blue} Employee of the Month.\\
+    
+    
+    
+    
+    \end{center}
+    \vspace{38em}
+    
+    \texttt{\noindent
+    Date:5/20/2019\hspace{35ex}Signature:AnkitaMistry}
+    \end{title}
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
