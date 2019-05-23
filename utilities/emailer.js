@@ -12,17 +12,27 @@ function emailer(msg_recipients, msg_subject, msg_html, path_to_attachment){
             pass : config['osu_email']['password']
         }
     })
-    transporter.sendMail({
-        from : "ken@capstone.com",
-        to: msg_recipients,
-        subject: msg_subject,
-        html: msg_html,
-        attachments: [
-            {
-                path : path_to_attachment
-            }
-        ]
-    })
+    if( path_to_attachment !== undefined ){
+        var email = {
+            from : "awards@RIGEL-ERP.com",
+            to: msg_recipients,
+            subject: msg_subject,
+            html: msg_html,
+            attachments: [
+                {
+                    path : path_to_attachment
+                }
+            ]
+        }
+    } else {
+        var email = {
+            from : "password-reset@RIGEL-ERP.com",
+            to : msg_recipients,
+            subect : msg_subject,
+            html : msg_html
+        }
+    }
+    transporter.sendMail(email);
 }
 
 module.exports = emailer;
