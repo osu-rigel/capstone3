@@ -75,16 +75,12 @@ router.post('/', function(req, res, next) {
                 //     });
                 // });
                   // else render this page.
+                  db.disconnect(dbConnection);
               });
           });
-            
-            
-            
+               
         }
-        
     });  
-
-     
 });
 
 module.exports = router;

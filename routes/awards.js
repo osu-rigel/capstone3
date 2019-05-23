@@ -73,8 +73,9 @@ router.post('/addAward', (req, res) => {
             pdf.on('finish', () => {
                 emailer(req.body['awardee_email'], "You have received an award", "<p>See attached for your award</p>", "./utilities/PDFs/output.pdf");
             })
+            db.disconnect(dbConnection);
         })
-        db.disconnect(dbConnection);
+
     })
 
     res.redirect('/user_page');
