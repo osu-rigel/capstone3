@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport   = require('passport')
-const authUtil = require('../utilities/authenticate.js');
+const auth = require('../utilities/authenticate.js');
 const db = require ('../utilities/db.js');
 
 function getPerson(res, context, user_id, complete){
@@ -26,13 +26,19 @@ function getPerson(res, context, user_id, complete){
 
 /* GET home page. */
 router.get('/', function(req, res){
-  if( !req.isAuthenticated() ){
-    res.render('Dashboard', {
-      layout: false
-  });
-  } else {
-    res.redirect('/user_page');
+  if(req.isAuthenticated()){
+     if((req.user.user_type) === undefined){                        // Check if admin is logged in.
+        res.redirect('/admin');
+    }else if (req.user.user_type){                       // Check if user is logged in.
+        res.redirect('/user_page');
+    }
   }
+  else {
+     res.render('Dashboard', {
+      layout: false
+   });
+ }
+ 
 });
 
 // // User profile page.
@@ -85,8 +91,9 @@ router.get('/logout', (req, res, next) => {
         var inserts = [req.body.firstname, req.body.lastname, req.params.id];
         var dbConnection = db.connect();
         dbConnection.query(sql,inserts,function(error, results, fields){
-            if(error) throw error;
-            //res.render('profile', { title: 'Profile',name: req.body.firstname, id: req.params.id });
+            if(error) {
+                console.log(error);
+            }
             res.redirect('/user_page');                                                                      // Check how to dynamically show my user firstname changed.
         });
         db.disconnect(dbConnection);

@@ -13,38 +13,9 @@ router.get('/', (req, res) => {
 
 })
 
-// router.post('/register', function(req, res, next) {
-//     console.log (req.body);
-//     const firstname = req.body.Firstname;
-//     const lastname  = req.body.Lastname;
-//     const email     = req.body.Username;
-//     const password  = req.body.Password;
-  
-//      console.log("signup POST() method recieved in signup.js");
-//     // Pull the database here.
-   
-//     // To hash the password.
-//     bcrypt.hash(password, saltRounds, function(err, hash) {   
-//         // Store hash in your password DB.
-//         var dbConnection = db.connect();
-//         dbConnection.query('Insert INTO users (email,firstname, lastname, password) VALUES (?,?,?,?)',[email,firstname, lastname, hash],function(error,results,fields){  // These ? help prevent SQL injection attacks by escaping. The MYSQL packages automatically escapes values.
-//             if(error){
-//                 console.error(error);
-//             } 
-//             dbConnection.query("SELECT user_id FROM users WHERE email = ?", [email], (err, results)=> {
-//                 if(err){
-//                     console.error(error);
-//                 }
-//                 const user_id = results[0]['user_id'];
-//                 res.redirect('/user');
-//                 db.disconnect(dbConnection);
-//             });
-//             // else render this page.
-//         });
-//     });  
-// });
 
-router.post('/register', function(req, res, next) {
+
+router.post('/', function(req, res, next) {
   global.upload(req,res,function(err){
         if(err){
             res.render('fileupload',{
@@ -82,28 +53,27 @@ router.post('/register', function(req, res, next) {
                 console.log(filename);
                 console.log(filetype);
                 console.log(filesize);
-             
-                dbConnection.query('SELECT user_id,firstname FROM users WHERE email = ?', [email],function(error,results,fields){
-                    if(err) throw error;
-                    const user_id = results[0].user_id;
-                    const fname = results[0].firstname;
-                    //console.log("User id is: ");
-                    //console.log(user_id);
+                
+                res.redirect('/login');
+                // dbConnection.query('SELECT user_id,firstname FROM users WHERE email = ?', [email],function(error,results,fields){
+                //     if(err) throw error;
+                //     const user_id = results[0].user_id;
+                //     const fname = results[0].firstname;
                     
-                    console.log("THe results in register route is: ");
-                    console.log(results[0]);
-                    // console.log("User id is: "+ results[0].user_id);
-                    //console.log(results[0].hello);
-                    //console.log("Above line should be undefined");
-                    req.login(user_id,function(err){
-                        res.render('user_page',{ 
-                          name: fname, 
-                          id: user_id,
-                          layout: false
-                        });
-                        db.disconnect(dbConnection);
-                    });
-                });
+                    
+                //     console.log("THe results in register route is: ");
+                //     console.log(results[0]);
+                    
+                //     req.login(user_id,function(err){
+                //         // res.render('user_page',{ 
+                //         //   name: fname, 
+                //         //   id: user_id,
+                //         //   layout: false
+                //         // });
+                //         res.redirect('/user_page');
+                //         db.disconnect(dbConnection);
+                //     });
+                // });
                   // else render this page.
               });
           });

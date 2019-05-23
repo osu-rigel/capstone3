@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
             id: id,
             layout: false
         });
+        
     }); 
     db.disconnect(connection); 
 })

@@ -11,15 +11,14 @@
                 <th>Admin Id</th>
                 <th>Admin Email</th>
                 <th>Actions</th>
-                <th>Actions</th>
             </tr>
             
             {{#each admins}}
             <tr>
                 <td>{{this.user_id}}</td>
                 <td>{{this.email}}</td>
-                <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td><a href="/admin/edit-admin/{{this.user_id}}">Edit</a></td>
+                <td><a href="/admin/delete-admin/{{this.user_id}}">Delete</a></td>
             </tr>
         {{/each}}
 </table>
