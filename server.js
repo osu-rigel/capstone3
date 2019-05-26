@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars')
 var multer = require('multer')
+var flash  = require('connect-flash')
 var fs = require('fs');
 var config = JSON.parse(fs.readFileSync('./config/secret_info.json'));
 const db = require('./utilities/db.js');
@@ -82,11 +83,14 @@ app.use(session({
     saveUninitialized: false,              // no cookies will be stored for unauthorized users.
     //cookie: { secure: true }
 }));
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use(function(req,res,next){
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     res.locals.isAuthenticated = req.isAuthenticated();
     next();
 });

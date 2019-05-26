@@ -67,6 +67,7 @@ router.post('/signup', function(req, res, next) {
                 
                 //console.log("Admin id is:"+ results[0].user_id);
                 req.login(user_id,function(err){
+                    req.flash("success","Admin account successfully created");
                     res.redirect('/admin');
                     db.disconnect(dbConnection);
                 });

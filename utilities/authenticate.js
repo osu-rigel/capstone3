@@ -21,6 +21,7 @@ authenticate.isLoggedIn = (req, res) => {
         console.log("I am returning 1 for this user.");
         return 1;
     } else {
+        req.flash("error","Please login to your user account first");
         res.redirect('/login');
         return 0;
     }
@@ -34,6 +35,7 @@ authenticate.isAdminLoggedIn = (req, res) => {
         console.log("I am returning 1 for this admin.")
         return 1;
     } else {
+        req.flash("error","Please login to your admin account first");
         res.redirect('/admin/login');
         return 0;
     }

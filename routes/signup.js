@@ -17,12 +17,14 @@ router.get('/', (req, res) => {
 
 router.post('/', function(req, res, next) {
   global.upload(req,res,function(err){
+        var msg = '';
         if(err){
-            res.render('fileupload',{
-              msg:err,
-              layout: false
-            });
+           
+            //msg = "Please check file type and file size.";
+            req.flash("error","Please check file type and file size.");
+            res.redirect('/signup');
             console.log(err);
+            //console.log(msg);
         }else{
           console.log (req.body);
           console.log("The file object is as shown below.");
@@ -53,29 +55,10 @@ router.post('/', function(req, res, next) {
                 console.log(filename);
                 console.log(filetype);
                 console.log(filesize);
-                
+                req.flash("success","User account successfully registered.");
                 res.redirect('/login');
-                // dbConnection.query('SELECT user_id,firstname FROM users WHERE email = ?', [email],function(error,results,fields){
-                //     if(err) throw error;
-                //     const user_id = results[0].user_id;
-                //     const fname = results[0].firstname;
-                    
-                    
-                //     console.log("THe results in register route is: ");
-                //     console.log(results[0]);
-                    
-                //     req.login(user_id,function(err){
-                //         // res.render('user_page',{ 
-                //         //   name: fname, 
-                //         //   id: user_id,
-                //         //   layout: false
-                //         // });
-                //         res.redirect('/user_page');
-                //         db.disconnect(dbConnection);
-                //     });
-                // });
-                  // else render this page.
-                  db.disconnect(dbConnection);
+                
+                db.disconnect(dbConnection);
               });
           });
                

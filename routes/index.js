@@ -51,9 +51,12 @@ router.get('/', function(req, res){
 
 // logout route
 router.get('/logout', (req, res, next) => {
+    
     req.logout()                                 // this only logs out of the application. Does not remove session.
     req.session.destroy(() => {                  // removes session.
-        res.clearCookie('connect.sid')
+        // req.flash("error", "Successfully logged out.");
+        res.clearCookie('connect.sid');
+        
         res.redirect('/')
     })
 });
