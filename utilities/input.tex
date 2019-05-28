@@ -1,15 +1,11 @@
-\documentclass[a4paper]{article}
+\documentclass[a4]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
-\usetikzlibrary{calc}
 \usepackage{graphicx}
 
 
 \begin{document}
     \pagestyle{empty}
-        \begin{tikzpicture}[remember picture, overlay]
-            \draw[line width=2pt] ($(current page.north west) + (1in, -0.5in)$) rectangle ($(current page.south east) + (-0.5in, 1in)$);
-        \end{tikzpicture}
     
     \begin{title} \\
     \begin{center}
@@ -33,7 +29,9 @@
     Date:DATE\hspace{35ex}Signed:GIVER}
     \end{title}
     \begin{figure}[h!]
-        \includegraphics[width=\linewidth]{SIGNATURE}
+        \begin{flushright}
+            \includegraphics[width=0.5\linewidth,keepaspectratio]{SIGNATURE}
+        \end{flushright}
     \end{figure}
 \end{document}
 
