@@ -12,6 +12,8 @@ h2 {
     font-family: sans-serif;
     color: darkorange;
     text-shadow: 2px 2px black;
+    display: block;
+    margin-right: 210px; 
     
 }
 
@@ -35,6 +37,16 @@ p {
    font-size: 16px;
    font-family: sans-serif; 
    color: gold;
+}
+
+.header img {
+    opacity: 0.9;
+    float: left;
+    width: 200px;
+    height: auto;
+    display: inline-block; 
+    margin: 0px;
+    padding: 0px;
 }
 
 Form {
