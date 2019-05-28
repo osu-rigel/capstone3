@@ -16,6 +16,8 @@ var MySQLStore = require('express-mysql-session')(session)  // To store sessions
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy      // local strategy for authorizing using local database.
 var bcrypt = require('bcrypt')
+var async = require('async')
+var crypto = require('crypto')
 
 // Set storage engine
 var storage = multer.diskStorage({
