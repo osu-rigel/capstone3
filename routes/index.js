@@ -7,7 +7,7 @@ var async = require('async');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-var nodemailer = require('nodemailer');
+const emailer = require('../utilities/emailer.js');
 
 function getPerson(res, context, user_id, complete){
     var sql = "SELECT user_id, firstname, lastname FROM users WHERE user_id = ?";
@@ -104,6 +104,12 @@ router.post('/forgot', function(req, res, next) {
       
     },
     function(token, results, done) {
+      var text = 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process:\n\nhttp://' + req.headers.host + '/reset/' + token + '\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n';
+      emailer(results.email, "Password Reset", text);
+      setTimeout( () => {
+        res.redirect('/');
+      }, 2000);
+      /*
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -127,6 +133,8 @@ router.post('/forgot', function(req, res, next) {
         req.flash('success', 'An e-mail has been sent to ' + results.email + ' with further instructions.');
         done(err, 'done');
       });
+      */
+
     }
   ], function(err) {
     if (err) return next(err);
