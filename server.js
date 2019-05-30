@@ -41,7 +41,7 @@ global.upload = multer({
 // checkFileType function 
 
 function checkFileType(file,cb){
-    const filetypes = /jpeg|jpg|png|gif/;              // regular expression.
+    const filetypes = /jpeg|jpg|png/;              // regular expression.
     
     // check extension
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
