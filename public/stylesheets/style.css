@@ -14,11 +14,10 @@ h2 {
     text-shadow: 2px 2px black;
     display: block;
     margin-right: 210px; 
-    
 }
 
 h3 {
-    text-align: left;
+    text-align: center-left;
     font-size: 18px;
     font-family: sans-serif;
     color: cornflowerblue;
@@ -30,6 +29,14 @@ h4 {
     color: goldenrod;
     text-align: left;
 }    
+
+h5 {
+   font-size: 14px;
+   font-family: sans-serif;
+   color: #FFFF99;
+   text-align: left; 
+}
+
 
 p {
    margin: 30px;
@@ -233,9 +240,11 @@ ul li ul li a{
     
 }
 
-#plotlyOptions{
+#plotlyOptions {
+    float: left;
     padding: 10px;
-    margin: 0 0 10px;
+    margin-right: 1150px;
+    margin-left: 5px;
     border: 2px solid black;
     outline: 1;
     width: 15%;
@@ -243,11 +252,13 @@ ul li ul li a{
 }
 
 #plotlyLoad{
+    position: relative;
     background-color: darkseagreen;
     border: 2px solid black;
+    margin-top: 82px;
+    margin-right: 100px;
+    margin-left: 45px;
     cursor: pointer;
-    margin: 10px;
     padding: 10px;
-    width: 6%;
-    
+    width: 6%;  
 }
