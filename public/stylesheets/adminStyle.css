@@ -67,14 +67,17 @@ a:hover{
 #tables{
     border-style: solid;
     color: darkkhaki;
-    float: left; 
-    table-align: right;
+    margin-right: 1000px;
+    margin-left: auto;
 }
 
 #tables td, th {
     border: 1px solid papayawhip;
     color: darkkhaki;
     text-align: center;
+    align: center;
+    height: 50px;
+    width: auto;
 }
 
 #tables input[type=submit]{
