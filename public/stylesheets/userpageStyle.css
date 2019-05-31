@@ -12,6 +12,8 @@ h2 {
     font-family: sans-serif;
     color: darkorange;
     text-shadow: 2px 2px black;
+    margin-right: 210px; 
+    display: block;
 }
 
 h3 {
@@ -20,6 +22,7 @@ h3 {
     font-family: sans-serif;
     color: cornflowerblue;
     text-align: center;
+    margin-right: 290px;
 }
 
 h4 {
@@ -37,6 +40,17 @@ p {
    font-family: sans-serif; 
    color: gold;
 }
+
+.header img {
+    opacity: 0.9;
+    float: left;
+    width: 200px;
+    height: auto;
+    display: inline-block; 
+    margin: 0px;
+    padding: 0px;
+} 
+
 a {
     font-family: sans- serif;
     color: honeydew;
@@ -69,9 +83,7 @@ ul li {
     border style: solid;
     border-color: orange;
     font-color: orange;
-
 }
-
 
 ul li a {
     text-decoration: none;
@@ -81,7 +93,6 @@ ul li a {
     white-space: nowrap;
 }
 
-
 ul li ul li {
     display: none;
 }
@@ -90,15 +101,15 @@ ul li:hover ul li {
     display: block;
 }
 
-ul li a:hover{
+ul li a:hover {
     background-color: gray;
 }
 
-ul li ul li a{
+ul li ul li a {
    cursor: pointer;
 }
 
-#tables{
+#tables {
     border-style: solid;
     color: darkkhaki;
     float: left; 
