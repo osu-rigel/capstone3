@@ -1,14 +1,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="icon" href="/images/FAVICON.png" size="16x16" type="image/png"> 
+
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 
 <div class="header">
     <img src="/images/ERPLOGO.png" ALT="">
 </div>
     
-<h2>Update {{person.firstname}} {{person.lastname}}</h2>
-
 <a href="/user_page" style="color:orange;float:right;">Back to UserPage</a>
+
+<h2>Update {{person.firstname}} {{person.lastname}}</h2>
 
 <form id="update-person" action="/edit/{{person.user_id}}" method="post">
     <input type="text" name="firstname" value="{{person.firstname}}"><br>

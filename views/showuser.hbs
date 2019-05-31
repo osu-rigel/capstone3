@@ -1,32 +1,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="icon" href="/images/FAVICON.png" size="16x16" type="image/png">
+
 <link rel="stylesheet" type="text/css" href="/stylesheets/adminStyle.css">
 
 <div class="header">
     <img src="/images/ERPLOGO.png" ALT="">
 </div> 
 
-<h2>Employee Recognition Portal User List</h2>
-
 <a href="/admin"> Back to AdminPage</a>
 
-<table id = tables>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Actions</th>
-            </tr>
+<h2>Employee Recognition Portal User List</h2>
+
+<table align="left" id = tables>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Edit User</th>
+        <th>Delete User</th>
+    </tr>
             
-            {{#each users}}
-            <tr>
-                <td>{{this.user_id}}</td>
-                <td>{{this.email}}</td>
-                <td>{{this.firstname}}</td>
-                <td>{{this.lastname}}</td>
-                <td><a href="/admin/edit-user/{{this.user_id}}">Edit</a></td>
-                <td><a href="/admin/delete-user/{{this.user_id}}">Delete</a></td>
-            </tr>
-        {{/each}}
+    {{#each users}}
+    <tr>
+        <td>{{this.user_id}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.firstname}}</td>
+        <td>{{this.lastname}}</td>
+        <td><a href="/admin/edit-user/{{this.user_id}}">Edit</a></td>
+        <td><a href="/admin/delete-user/{{this.user_id}}">Delete</a></td>
+    </tr>
+    {{/each}}
 </table>

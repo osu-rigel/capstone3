@@ -1,27 +1,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="icon" href="/images/FAVICON.png" size="16x16" type="image/png">
+
 <link rel="stylesheet" type="text/css" href="/stylesheets/userpageStyle.css">
+
+<div class="header">
+    <img src="/images/ERPLOGO.png" ALT="">
+</div>
+
+<ul>
+    <li><a href="login/user_page">User Profile</a>
+        <ul>
+            <li><a href="/edit/{{id}}">Update User</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Awards</a>
+        <ul>
+            <li><a href="awards/addaward">Add Awards</a></li>
+        </ul>
+    </li>
+    <li><a href="/logout">Logout</a></li>
+</ul>
 
 <h2>Employee Recognition Portal User Webpage</h2>
 
-
-    <ul>
-        <li><a href="login/user_page">User Profile</a>
-            <ul>
-                <li><a href="/edit/{{id}}">Update User</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Awards</a>
-            <ul>
-                <li><a href="awards/addaward">Add Awards</a></li>
-            </ul>
-        </li>
-        <li><a href="/logout">Logout</a></li>
-    </ul>
-
 <h3>Welcome {{name}} !</h3>
 
-
+<br>
 
 <h4> My awards</h4>
 
