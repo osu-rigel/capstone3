@@ -241,7 +241,6 @@ ul li ul li a{
 }
 
 #plotlyOptions {
-    float: left;
     padding: 10px;
     margin-right: 1150px;
     margin-left: 5px;
@@ -252,7 +251,6 @@ ul li ul li a{
 }
 
 #plotlyLoad{
-    float: left;
     background-color: darkseagreen;
     border: 2px solid black;
     cursor: pointer;
