@@ -1,0 +1,23 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" href="/images/FAVICON.png" size="16x16" type="image/png">
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+<div class="header">
+    <img src="/images/ERPLOGO.png" ALT="">
+</div>
+
+<h2>Employee Recogniton Portal Reset Account Page</h2>
+
+<h3>Not able to login? Please provide your valid email address. Reset link will be sent to your email address.</h3>
+
+<div class ="Form">
+    <form action="/login/create_pass" method="post">
+        <div class = "Form_Layout">
+            <input type="email" placeholder="Enter Email Address" name="Username" required/><br/>
+            <input type="submit" value="Submit">
+        </div>
+        {{{ResetStatus}}}
+    </form>
+</div>
