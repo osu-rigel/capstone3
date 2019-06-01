@@ -268,6 +268,7 @@ router.get('/logout', (req, res, next) => {
             if(error) {
                 console.log(error);
             }
+            req.flash("success", "Username updated successfully. Please logout and login again to see changes");
             res.redirect('/user_page');                                                                      // Check how to dynamically show my user firstname changed.
         });
         db.disconnect(dbConnection);
