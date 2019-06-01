@@ -80,8 +80,6 @@ ul li {
     text-align: center;
     position: relative;
     display: inline-block;
-    border-style: solid;
-    border-color: orange;
     color: orange;
 }
 
