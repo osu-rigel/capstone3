@@ -182,7 +182,9 @@ ul li {
     text-align: center;
     position: relative;
     display: inline-block;
-    color: orange;
+    border style: solid;
+    border-color: orange;
+    font-color: orange;
 
 }
 
@@ -253,7 +255,7 @@ ul li ul li a{
     position: relative;
     background-color: darkseagreen;
     border: 2px solid black;
-    margin-top: 82px;
+    margin-top: 51px;
     margin-right: 100px;
     margin-left: 45px;
     cursor: pointer;
