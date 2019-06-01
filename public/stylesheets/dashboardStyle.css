@@ -63,7 +63,9 @@ ul li {
     text-align: center;
     position: realtive;
     display: inline-block;
-    color: orange;
+    border style: solid;
+    border-color: orange;
+    font-color: orange;
 
 }
 

@@ -5,9 +5,10 @@
     <img src="/images/ERPLOGO.png" ALT="">
 </div>
     
+<a href="/user_page" style="color:orange;float:right;">Back to UserPage</a>
+
 <h2>Update {{person.firstname}} {{person.lastname}}</h2>
 
-<a href="/user_page" style="color:orange;float:right;">Back to UserPage</a>
 
 <form id="update-person" action="/edit/{{person.user_id}}" method="post">
     <input type="text" name="firstname" value="{{person.firstname}}"><br>
