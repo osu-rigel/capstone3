@@ -266,9 +266,11 @@ router.get('/logout', (req, res, next) => {
         var dbConnection = db.connect();
         dbConnection.query(sql,inserts,function(error, results, fields){
             if(error) {
-                console.log(error);
+              console.log(error);
+              req.flash("error", "unable to change username");
+            } else {
+              req.flash("success", "Username updated successfully. Please logout and login again to see changes");
             }
-            req.flash("success", "Username updated successfully. Please logout and login again to see changes");
             res.redirect('/user_page');                                                                      // Check how to dynamically show my user firstname changed.
         });
         db.disconnect(dbConnection);
