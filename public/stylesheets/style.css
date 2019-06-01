@@ -252,7 +252,7 @@ ul li ul li a{
 }
 
 #plotlyLoad{
-    position: relative;
+    float: left;
     background-color: darkseagreen;
     border: 2px solid black;
     margin-top: 51px;
