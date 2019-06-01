@@ -1,11 +1,34 @@
-\documentclass[a4]{article}
+\documentclass[11pt,letterpaper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usepackage{graphicx}
-
+\pagestyle{empty}
+\usepackage{pgf}
+\usepackage{pgfpages}
+%
+\pgfpagesdeclarelayout{boxed}
+{
+  \edef\pgfpageoptionborder{3pt}
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=1,%
+  }
+  \pgfpageslogicalpageoptions{1}
+  {
+    border code=\pgfsetlinewidth{0.5pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.95\pgfphysicalwidth,%
+    resized height=.95\pgfphysicalheight,%
+    center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}%
+  }%
+}
+\pgfpagesuselayout{boxed}
+\setlength{\parindent}{2cm}
 
 \begin{document}
-    \pagestyle{empty}
+
     
     \begin{title} \\
     \begin{center}
@@ -23,10 +46,13 @@
     
     
     \end{center}
-    \vspace{15em}
-    
+    \vspace{10em}
+    \begin{flushright}
+      Signed:GIVER\\
+      Date:DATE
+    \end{flushright}
     \texttt{\noindent
-    Date:DATE\hspace{35ex}Signed:GIVER}
+    \hspace{25ex}}
     \end{title}
     \begin{figure}[h!]
         \begin{flushright}
