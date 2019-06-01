@@ -207,24 +207,11 @@ router.post('/reset/:token', function(req, res) {
       });
     },
     function(results, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'osurigel@gmail.com',
-          pass: process.env.GMAILPW
-        }
-      });
-      var mailOptions = {
-        to: results.email,
-        from: 'passwordreset@demo.com',
-        subject: 'Your password has been changed',
-        text: 'Hello,\n\n' +
-          'This is a confirmation that the password for your account ' + results.email + ' has just been changed.\n'
-      };
-      smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('success', 'Success! Your password has been changed.');
-        done(err);
-      });
+      var text = 'Hello,\n\nThis is a confirmation that the password for your account ' + results.email + ' has just been changed.\n';
+      emailer(results.email, "Password Reset", text);
+      setTimeout( () => {
+        res.redirect('/');
+      }, 2000);
     }
   ], function(err) {
     res.redirect('/');
