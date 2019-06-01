@@ -12,6 +12,8 @@ h2 {
     font-family: sans-serif;
     color: darkorange;
     text-shadow: 2px 2px black;
+    display: block;
+    margin-right: 210px; 
 }
 
 h3 {
@@ -37,6 +39,17 @@ p {
    font-family: sans-serif; 
    color: gold;
 }
+
+.header img {
+    opacity: 0.9;
+    float: left;
+    width: 200px;
+    height: auto;
+    display: inline-block; 
+    margin: 0px;
+    padding: 0px;
+}
+
 a {
     font-family: sans- serif;
     color: orange;
@@ -54,8 +67,8 @@ a:hover{
 #tables{
     border-style: solid;
     color: darkkhaki;
-    float: left; 
-    table-layout: auto;
+    margin-right: 1000px;
+    margin-left: auto;
 }
 
 #tables td, th {
@@ -63,6 +76,8 @@ a:hover{
     color: darkkhaki;
     text-align: center;
     align: center;
+    height: 50px;
+    width: auto;
 }
 
 #tables input[type=submit]{
@@ -86,4 +101,3 @@ a:hover{
 #tables tr:hover {
     background-color: peachpuff;
 }
-
