@@ -82,9 +82,9 @@ router.post('/addAward', (req, res) => {
 });
 
 router.get('/addAward', (req, res) => {
-   // if( auth.isLoggedIn(req, res) === 0 ){
-       // return;
-   // }
+    if( auth.isLoggedIn(req, res) === 0 ){
+        return;
+    }
     res.render('addaward', {
         layout: false
     });
