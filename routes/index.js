@@ -237,7 +237,9 @@ router.get('/logout', (req, res, next) => {
   /* Display one person for the specific purpose of updating people */
 
     router.get('/edit/:id', function(req, res){
-      
+      if( auth.isLoggedIn(req, res) === 0 ) {
+        return;
+      }
         var callbackCount = 0;
         var context = {};
        // context.jsscripts = ["updateperson.js"];
@@ -259,6 +261,9 @@ router.get('/logout', (req, res, next) => {
 /* The URI that update data is sent to in order to update a person */
 
     router.post('/edit/:id', function(req, res,next){
+      if( auth.isLoggedIn(req, res) === 0 ) {
+        return;
+      }
         console.log(req.body)
         console.log(req.params.id)
         var sql = "UPDATE users SET firstname=?, lastname=? WHERE user_id=?";
