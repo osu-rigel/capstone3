@@ -43,18 +43,18 @@ for( var i=0; i<2; ++i ){
 db.disconnect(dbConnection);*/
 
 router.get('/', (req, res) => {
-    /*if( auth.isLoggedIn(req,res) === 0 ){
+    if( auth.isLoggedIn(req,res) === 0 ){
         return;
-    }*/
+    }
     res.render('plotlyTest', {
         layout: false
     });
 })
 
 router.get('/load/:field', (req, res) => {
-    /*if( auth.isLoggedIn(req,res) === 0 ){
+    if( auth.isLoggedIn(req,res) === 0 ){
         return;
-    }*/
+    }
     var SQLparams = [ req.params['field'] ];
     var SQLquery = "SELECT * FROM emp_award";
     var dbConnection = db.connect();
