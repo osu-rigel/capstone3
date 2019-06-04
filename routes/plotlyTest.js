@@ -43,7 +43,7 @@ for( var i=0; i<2; ++i ){
 db.disconnect(dbConnection);*/
 
 router.get('/', (req, res) => {
-    if( auth.isLoggedIn(req,res) === 0 ){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
         return;
     }
     res.render('plotlyTest', {
@@ -52,7 +52,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/load/:field', (req, res) => {
-    if( auth.isLoggedIn(req,res) === 0 ){
+    if( auth.isAdminLoggedIn(req,res) === 0 ){
         return;
     }
     var SQLparams = [ req.params['field'] ];
