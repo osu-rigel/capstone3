@@ -242,6 +242,7 @@ ul li ul li a{
 
 #plotlyOptions {
     float: left;
+    z-index: 1;
     padding: 10px;
     border: 2px solid black;
     outline: 1;
